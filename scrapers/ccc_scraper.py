@@ -1,7 +1,12 @@
 import re
 import soupify
 
-ccc_soup = soupify.create_soup("https://www.seasonofcycling.co.nz/service/mountain/track-status/")
+import os, ssl
+if (not os.environ.get('PYTHONHTTPSVERIFY', '') and
+getattr(ssl, '_create_unverified_context', None)):
+    ssl._create_default_https_context = ssl._create_unverified_context
+
+ccc_soup = soupify.create_soup("https://www.ccc.govt.nz/transport/cycling/find-a-ride/trackstatus/")
 tf_soup = soupify.create_soup("https://www.trailforks.com/region/victoria-park/trails/")
 
 trails = {}

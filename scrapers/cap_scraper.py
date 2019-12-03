@@ -9,7 +9,7 @@ def parse_status_div(div):
     except:
         res = re.search(r".\/closed.svg", src)
         try:
-            res.string; return "open"
+            res.string; return "closed"
         except: raise Exception("statusError")
 
 soup = soupify.create_soup("https://www.christchurchadventurepark.com/trail-information")
