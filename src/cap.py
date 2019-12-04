@@ -34,8 +34,5 @@ def scrape():
         parsed_status = not status == "Closed"
 
         trails.append(region.Trail(parsed_name, parsed_grade, parsed_status))
-    return trails
-
-scraped_data = scrape()
-for data in scraped_data:
-    print(data.name, data.grade, data.status)
+    
+    return region.json_encode(trails)

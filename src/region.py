@@ -1,4 +1,5 @@
 import re, requests
+import json
 
 from bs4 import BeautifulSoup
 import dryscrape
@@ -20,6 +21,9 @@ def parse(regex, element):
     if res:
         return res.groups()
     return False
+
+def json_encode(list):
+    return json.dumps([trail.__dict__ for trail in list])
 
 class Trail:
     def __init__(self, name, grade, status):

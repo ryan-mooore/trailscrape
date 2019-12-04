@@ -41,9 +41,4 @@ def scrape(area):
         
         trails.append(region.Trail(parsed_name, parsed_grade, parsed_status))
 
-    return trails
-
-area = "queenstown-bike-park-4524"
-scraped_data = scrape(area)
-for data in scraped_data:
-    print(data.name, data.grade, data.status)
+    return region.json_encode(trails)
