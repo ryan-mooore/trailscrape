@@ -9,4 +9,13 @@ def create_soup(url):
         raise Exception("RequestError 4xx")
 
 def parse(regex, element):
-    return re.match(regex, element).groups()
+    res = re.match(regex, element)
+    if res:
+        return res.groups()
+    return False
+
+class Trail:
+    def __init__(self, name, grade, status):
+        self.name = name
+        self.grade = grade
+        self.status = status

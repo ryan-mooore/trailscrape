@@ -1,21 +1,31 @@
-import soupify
+import region
 
 def scrape():
-    soup = soupify.create_soup("https://www.christchurchadventurepark.com/trail-information")
+    soup = region.create_soup("https://www.christchurchadventurepark.com/trail-information")
 
-    trails = {}
-    trail_id = "tract-name"
-    current_trail = soup.find()
+    trails = []
+    trail_list = soup.find("div", {"class" : "trail-status-list"})
+    grades = [None, "Beginner", "Intermediate", None, "Advanced", "Expert", None]
 
-    total_trails = len(soup.find_all("div", class_ = trail_id))
+    for row in trail_list.find_all("div", {"class" : "list-item"}):
+        name   = row.find("div", {"class" : "tract-name"}).string
+        grade  = row.find("div", {"class" : "track-level" }).img.get("alt")
+        status = row.find("div", {"class" : "tract-status"}).img.get("alt")
 
-    for _ in range(total_trails):
-        current_trail = current_trail.find_next("div", class_ = trail_id)
-        name = current_trail.next_element
-        status = soupify.parse(
-            r".+\/([a-z]+)\.svg", 
-            current_trail.next_sibling.next_sibling.img.get("src")
-            )[0]
-        trails[name] = status
+        parsed_name = name.title()
 
+        parsed_grade = region.parse(r"(\b(?!\bHiking\b)\w+\b)", grade)
+        if parsed_grade:
+            print(parsed_grade)
+            parsed_grade = grades.index(parsed_grade[0])
+        else:
+            parsed_grade = -1
+
+        parsed_status = not status == "Closed"
+
+        trails.append(region.Trail(parsed_name, parsed_grade, parsed_status))
     return trails
+
+scraped_data = scrape()
+for data in scraped_data:
+    print(data.name, data.grade, data.status)

@@ -1,20 +1,36 @@
-import soupify
+import re, region
 
 def scrape():
-    soup = soupify.create_soup("https://www.skyline.co.nz/en/queenstown/things-to-do/queenstown-mountain-biking/mountain-bike-park-info/")
+    soup = region.create_soup("https://www.skyline.co.nz/en/queenstown/things-to-do/queenstown-mountain-biking/mountain-bike-park-info/")
 
-    trails = {}
-    trail_id = "c-accordion__header-title"
-    current_trail = soup.find()
+    trails = []
+    trail_list = soup.find("h2", text=re.compile(r"Mountain Bike Trails")).find_next("ul")
 
-    total_trails = len(soup.find_all("h3", class_ = trail_id))
+    for row in trail_list.find_all("li"):
+        name_and_status = row.find_all("div")[0].h3.string
+        grade           = row.find_all("div")[1].div.find_all("p")[-1].find_all("strong")[1].next_sibling
 
-    for _ in range(total_trails) :
-        current_trail = current_trail.find_next("h3", class_ = trail_id)
-        (name, status) = soupify.parse(
-            r'([A-Z].+) - +([A-Z]+)',
-            current_trail.text
-            )
-        trails[name] = status.lower()
+        (parsed_name, status) = region.parse(
+            r"([A-Z].+) - +([A-Z]+)",
+            name_and_status
+        )
+
+        print(grade)
+        if not type(grade) == str:
+            grade = grade.string
+        parsed_grade = region.parse(r"([1-6])", grade)
+        
+        if parsed_grade:
+            parsed_grade = parsed_grade[0]
+        else:
+            parsed_grade = -1
+
+        parsed_status = not status == "CLOSED"
+
+        trails.append(region.Trail(parsed_name, parsed_grade, parsed_status))
         
     return trails
+
+scraped_data = scrape()
+for data in scraped_data:
+    print(data.name, data.grade, data.status)
