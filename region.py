@@ -1,10 +1,17 @@
-from bs4 import BeautifulSoup
 import re, requests
 
-def create_soup(url):
+from bs4 import BeautifulSoup
+import dryscrape
+
+def create_soup(url, dynamic=False):
     try:
-        content = requests.get(url)
-        return BeautifulSoup(content.text, features="html.parser")
+        if dynamic:
+            content = dryscrape.Session()
+            content.visit(url)
+            return BeautifulSoup(content.body(), "lxml")
+        else:
+            content = requests.get(url)
+            return BeautifulSoup(content.text, "html.parser")
     except:
         raise Exception("RequestError 4xx")
 
