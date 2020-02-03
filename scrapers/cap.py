@@ -1,4 +1,4 @@
-import region
+from common import common
 
 def scrape():
     soup = region.create_soup(

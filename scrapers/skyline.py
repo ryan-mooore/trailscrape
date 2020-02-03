@@ -1,4 +1,5 @@
-import re, region
+import re
+from common import common
 
 def scrape(area):
     if area == "queenstown":
@@ -32,7 +33,7 @@ def scrape(area):
 
         #this is kinda fucked because its a mess of spans and divs
         #so i had to do some weird shit
-        grade           = row.find_all("div")[1].find_all("strong")[-1]
+        grade = row.find_all("div")[1].find_all("strong")[-1]
 
         #rotorua and queenstwon are formatted slightly differently
         if area == "queenstown": grade = grade.next_sibling

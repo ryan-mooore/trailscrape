@@ -1,44 +1,48 @@
 from flask import Flask
-import requests
 
-import cap, skyline, craigieburn, trailforks
+from scrapers import craigieburn
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def hello():
-    return "{}{}".format(cap.scrape(), qbp.scrape())
+    return None
 
+@app.route('/api', methods=['GET'])
+def api_all():
+    return craigieburn.run()
+
+app.run()
 """
 CAP
 #web grading > tf grading
 #web status > tf status
-"""
+
 cap.scrape()
 
-"""
+f
 SKYLINE QUEENSTOWN
 #web grading > tf grading
 #web status > tf status
-"""
+
 skyline.scrape("queenstown")
 
-"""
+
 SKYLINE ROTORUA
 #web grading > tf grading
-#web status > tf status
-"""
+
 skyline.scrape("rotorua")
 
-"""
 CRAIGIEBURN
-#tf grading
+tf grading
 #web status > tf status
+
 """
-craigieburn.scrape()
+craigieburn.run()
 #todo - grading integration with trailforks
 
 """
 TRAILFORKS
-"""
+
 trailforks.scrape("area")
+"""
