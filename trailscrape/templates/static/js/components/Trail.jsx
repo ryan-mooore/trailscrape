@@ -6,11 +6,19 @@ export default function Trail(props) {
     const grade = json["grade"];
     const isOpen = json["is_open"];
 
+    let trailMessage = "Null"
+    if (isOpen === true) {
+        trailMessage = "Open";
+    } 
+    else if (isOpen === false) {
+        trailMessage = "Closed"
+    }
+
     return (
         <div>
             <h3>{name}</h3>
             <p>Grade: {grade}</p>
-            <p>Trail is{isOpen ? "" : "n't"} open</p>
+            <p>{trailMessage}</p>
         </div>
     )
 }

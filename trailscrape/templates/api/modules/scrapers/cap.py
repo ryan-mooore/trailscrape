@@ -1,7 +1,7 @@
-from .common import common
+from .common import classes
 
 def run():
-    cap = common.Region()
+    cap = classes.Region()
     cap.create_soup(
         "https://www.christchurchadventurepark.com/trail-information"
     )
@@ -32,6 +32,6 @@ def run():
 
         parsed_status = not status == "Closed"
 
-        cap.trail_status.append(common.Trail(parsed_name, parsed_grade, parsed_status))
+        cap.trail_status.append(classes.Trail(parsed_name, parsed_grade, parsed_status))
     
     return cap.json_encode()

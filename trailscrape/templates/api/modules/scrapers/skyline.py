@@ -1,22 +1,23 @@
 import re
-from common import common
+from .common import classes
 
-def scrape(area):
+def run(area):
+    skyline = classes.Region()
+
     if area == "queenstown":
-        url = ("https://www.skyline.co.nz/en/queenstown/things-to-do/"
+        url = ("https://www.skyline.co.nz/en/queenstown/things-to-do/" +
               "queenstown-mountain-biking/mountain-bike-park-info/")
     elif area == "rotorua":
-        url = ("https://www.skyline.co.nz/en/rotorua/things-to-do/"
+        url = ("https://www.skyline.co.nz/en/rotorua/things-to-do/" + 
               "rotorua-mountain-biking/rotorua-mountain-bike-park-info/")
     else:
         raise Exception("RequestError 4xx")
-
-    soup = region.create_soup(url)
-
-    trails = []
-
+    
+    print(url)
+    skyline.create_soup(url)
+ 
     #find table after h2
-    trail_list = soup.find(
+    trail_list = skyline.soup.find(
         "h2",
         text=re.compile(r"Mountain Bike Trails|Trail Status")
     ).find_next("ul")
@@ -41,12 +42,12 @@ def scrape(area):
         #name and status are on one line e.g. (Hammy's Track) - (OPEN)
         #except sometimes its FUCKED UP sjhdkjahsdkj
         try:
-            (parsed_name, status) = region.parse(
+            (parsed_name, status) = skyline.parse(
                 r"(.+)\s-\s+([A-Za-z]+)",
                 name_and_status
             )
         except:
-            (parsed_name, status) = region.parse(
+            (parsed_name, status) = skyline.parse(
                 r"([A-Z].+)\s([A-Z])",
                 name_and_status
             )
@@ -58,7 +59,7 @@ def scrape(area):
         #no grade conversion needed for queenstown
         #as the correct number is already specified
         if area == "queenstown":
-            parsed_grade = region.parse(r".*([1-6])", grade)
+            parsed_grade = skyline.parse(r".*([1-6])", grade)
             
             if parsed_grade:
                 parsed_grade = parsed_grade[0]
@@ -67,7 +68,7 @@ def scrape(area):
         #otherwise grade conversion is needed (for rotorua)   
         else:
             print(grade)
-            parsed_grade = region.parse(r".+\s-\s+([A-Z][a-z]+)", grade)
+            parsed_grade = skyline.parse(r".+\s-\s+([A-Z][a-z]+)", grade)
             
             if parsed_grade:
                 parsed_grade = parsed_grade[0]
@@ -77,7 +78,7 @@ def scrape(area):
             
         parsed_status = not status.upper() == "CLOSED"
 
-        trails.append(region.Trail(parsed_name, parsed_grade, parsed_status))
+        skyline.trail_status.append(classes.Trail(parsed_name, parsed_grade, parsed_status))
     
     #convert to json
-    return region.json_encode(trails)
+    return skyline.json_encode()

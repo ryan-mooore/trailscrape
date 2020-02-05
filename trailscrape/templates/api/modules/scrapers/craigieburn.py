@@ -1,7 +1,7 @@
-from .common import common
+from .common import classes
 
 def run():
-    craigieburn = common.Region()
+    craigieburn = classes.Region()
     craigieburn.create_soup(
         "https://www.craigieburntrails.org.nz/track-status/",
         True
@@ -25,7 +25,7 @@ def run():
         )[0]
 
         #trail grading can not be found on the website so none is used
-        craigieburn.trail_status.append(common.Trail(parsed_name, None, parsed_status))
+        craigieburn.trail_status.append(classes.Trail(parsed_name, None, parsed_status))
 
     craigieburn.park_status = "closed"
     for trail in craigieburn.trail_status:
