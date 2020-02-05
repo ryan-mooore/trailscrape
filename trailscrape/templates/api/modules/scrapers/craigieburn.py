@@ -1,4 +1,4 @@
-from scrapers.common import common
+from .common import common
 
 def run():
     craigieburn = common.Region()

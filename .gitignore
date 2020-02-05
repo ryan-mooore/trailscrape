@@ -1,6 +1,12 @@
 __pycache__
-test
-ccc_scraper.py
-.vscode
 *.pyc
-FLASKAPP
+
+.vscode
+
+templates/static/node_modules/
+
+Pipfile.lock
+package-lock.json
+node_modules
+
+public
