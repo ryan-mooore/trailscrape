@@ -8,8 +8,12 @@ def run():
         "https://trackstatus.co.nz/", 
         "dynamic")
 
-    span = ccc.soup.find("span",
-        text=re.compile(r"Victoria Park Downhill"))
+    try:
+        span = ccc.soup.find("span",
+            text=re.compile(r"Victoria Park Downhill"))
+
+    except AttributeError:
+        raise ConnectionError("Website could not be reached")
 
     status = span.parent.parent.parent.parent.parent['class'][0]
 

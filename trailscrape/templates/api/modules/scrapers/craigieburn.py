@@ -7,8 +7,12 @@ def run():
         True
     )
 
+    try:
+        trail_list = craigieburn.soup.find("table", {"id" : "trackStatus"})
 
-    trail_list = craigieburn.soup.find("table", {"id" : "trackStatus"})
+    except AttributeError:
+        raise ConnectionError("Website could not be reached")
+
     for row in (trail_list.find_all("tr")):
         #skip table header
         if row.th:

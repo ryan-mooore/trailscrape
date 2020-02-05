@@ -7,7 +7,12 @@ def run():
     )
 
     #find table by div class
-    trail_list = cap.soup.find("div", {"class" : "trail-status-list"})
+
+    try:
+        trail_list = cap.soup.find("div", {"class" : "trail-status-list"})
+
+    except AttributeError:
+        raise ConnectionError("Website could not be reached")
 
     #grade numeric conversion from strings - as CAP uses IMBA trail grades,
     #certain fields are null for NZ only grades e.g blue advanced, easiest etc.

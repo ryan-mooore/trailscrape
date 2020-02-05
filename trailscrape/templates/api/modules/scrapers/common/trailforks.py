@@ -8,10 +8,13 @@ def scrape(region_name):
 
     trails = []
     #find table by section id
-    trail_list = tf_region.soup.find("section", {"id" : "main"})\
+    try:
+        trail_list = tf_region.soup.find("section", {"id" : "main"})\
                     .find_all("div")[1]\
                         .table\
                             .tbody
+    except AttributeError:
+        raise ConnectionError("Website could not be reached")
 
     #grade numeric conversion from strings
     grades = ["Easiest", "Easy", "Intermediate", "Advanced",\
