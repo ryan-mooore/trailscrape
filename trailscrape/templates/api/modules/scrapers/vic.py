@@ -2,37 +2,41 @@ from .common import trailforks, classes
 import re
 
 def run():
-    ccc = classes.Region()
-
-    ccc.create_soup(
-        "https://trackstatus.co.nz/", 
-        "dynamic")
-
     try:
+        ccc = classes.Region()
+        ccc.name = "Victoria Park"
+
+        ccc.create_soup(
+            "https://trackstatus.co.nz/", 
+            "dynamic")
+
+        #vic park does not have uplifts
+
         span = ccc.soup.find("span",
             text=re.compile(r"Victoria Park Downhill"))
 
-    except AttributeError:
-        raise ConnectionError("Website could not be reached")
+        status = span.parent.parent.parent.parent.parent['class'][0]
+        status = status.upper()
 
-    status = span.parent.parent.parent.parent.parent['class'][0]
+        
+        if status.endswith("OPEN"):
+            ccc.park_is_open = True
+        if status.endswith("CLOSED"):
+            ccc.park_is_open = False
 
-    if status == "TwOpen":
-        ccc.park_is_open = True
-    elif status == "TwClosed":
-        ccc.park_is_open = False
-    else:
-        ccc.park_is_open = True
+        trail_list = trailforks.scrape("victoria-park")
 
-    trail_list = trailforks.scrape("victoria-park")
-
-    for trail in trail_list:
-        ccc.trail_status.append(
-            classes.Trail(
-                trail.name,
-                trail.grade, 
-                ccc.park_is_open
+        for trail in trail_list:
+            ccc.trails.append(
+                classes.Trail(
+                    trail.name,
+                    trail.grade, 
+                    ccc.park_is_open #if park is open, trails are open
+                )
             )
-        )
-    
-    return ccc.json_encode()
+        
+        return ccc.json_encode()
+
+    except Exception as e:
+        print("vic", e)
+        return "{}"

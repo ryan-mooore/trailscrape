@@ -22,3 +22,25 @@ export default function Trail(props) {
         </div>
     )
 }
+
+const TrailList = () => {
+    const [trails, setTrails] = useState(<h1>Loading...</h1>);
+ 
+    const updateData = () => {
+       const response = (json) => {
+          setRegions(json["trails"].map((trail) => {
+             return <Trail key={trail.name} json={trail}/>
+          }))
+       }
+ 
+       apiGet('/', response)
+    }
+ 
+    useEffect(() => {
+       updateData();
+    }, []);
+ 
+    return (
+       <div>{regions}</div>
+    )
+ }

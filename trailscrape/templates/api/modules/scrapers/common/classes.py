@@ -14,28 +14,32 @@ class Trail:
 
     def reprJSON(self):
         return dict(
-            name=self.name, 
+            name=self.name,
             grade=self.grade,
             is_open=self.is_open
         ) 
 
 class Region:
     def __init__(self):
+        self.name = None
         self.park_is_open = None
         self.lift_is_open = None
-        self.trail_status = []
+        self.trails = []
 
     def reprJSON(self):
         return dict(
+            name=self.name,
             park_is_open=self.park_is_open,
             lift_is_open=self.lift_is_open,
-            trail_status=self.trail_status
+            trails=self.trails
         )
         
     def create_soup(self, url, dynamic=False):
         #try:
         if dynamic:
-            driver = webdriver.Chrome()
+            options = webdriver.ChromeOptions()
+            options.add_argument("headless")
+            driver = webdriver.Chrome(options=options)
             driver.get(url)
             time.sleep(2)
             self.soup = BeautifulSoup(driver.page_source, "lxml")
