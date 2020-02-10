@@ -1,8 +1,9 @@
 import React, { Component, useState, useEffect } from 'react';
-import Trail from './Trail'
 import Region from './Region'
+import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import style from '../../../public/css/home.css'
 
-function apiGet(url, onReturn) {
+function getJson(url, onReturn) {
    let xhr = new XMLHttpRequest();
  
    xhr.open("GET", "/api", true);
@@ -19,13 +20,22 @@ const RegionList = () => {
    const [regions, setRegions] = useState(<h1>Loading...</h1>);
 
    const updateData = () => {
+      
+      
       const response = (json) => {
-         setRegions(json["regions"].map((region) => {
-            return <Region key={region.name} json={region}/>
-         }))
-      }
-
-      apiGet('/', response)
+         setRegions(
+            json["regions"].map((region) => {
+               return (
+                  <div>
+                     <RegionElement key={region.name} json={region}/>
+                        
+                     <br />
+                  </div>
+               )
+            }))
+         }
+      
+      getJson('/', response)
    }
 
    useEffect(() => {
@@ -37,26 +47,34 @@ const RegionList = () => {
    )
 }
 
-const TrailList = () => {
-   const [trails, setTrails] = useState(<h1>Loading...</h1>);
 
-   const updateData = () => {
-      const response = (json) => {
-         setRegions(json["trails"].map((region) => {
-            return <Region key={region.name} json={region}/>
-         }))
-      }
+const RegionElement = (props) => {
+   
+   if (Object.entries(props.json).length === 0) {
+      return (
+         <div className={style.regionElement}>
+            Park information not currently available
+         </div>
+      )
+} else {
+      const name = props.json["name"];
+      const parkMessage = <h4>Park {props.json["park_is_open"] ? "is" : "is not"} open</h4>
+      const liftMessage = <h4>Lift {props.json["lift_is_open"] ? "is" : "is not"} open</h4>
+         
+      return (
+         <div className={style.regionElement}>
+            <h1>{name}</h1>
+            {parkMessage}
+            {props.json["lift_is_open"] == null ? <></> : liftMessage}
+            <br />
 
-      apiGet('/', response)
+            <Link to={{
+                           pathname: '/' + props.json["name"],
+                           state: props.json
+                        }}>Region Link</Link>
+         </div>
+      )
    }
-
-   useEffect(() => {
-      updateData();
-   }, []);
-
-   return (
-      <div>{regions}</div>
-   )
 }
 
 export default class Home extends Component {

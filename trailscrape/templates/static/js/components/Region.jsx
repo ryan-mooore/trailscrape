@@ -1,29 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect, Component } from 'react';
+import Trail from './Trail';
+import { Link } from 'react-router-dom';
 
-export default function Region(props) {
+const TrailList = (json) => {
+    const [trails, setTrails] = useState(<h1>load</h1>);
+ 
+    const updateData = (json) => {
+            setTrails (
+                json.map((trail) => {
+                    return <Trail key="" json={trail}/>
+                })
+            )
+       }
+ 
+    useEffect(() => {
+        updateData(json.json.trails);
+    }, []);
 
-    if (Object.entries(props.json).length === 0) {
-        return (
-            <div>
-                <h1>Park information not currently available</h1>
-                <br />
-            </div>
-        )
-    } else {
-        console.log(props.json)
-        const name = props.json["name"];
-        const parkIsOpen = props.json["park_is_open"];
-        const liftIsOpen = props.json["lift_is_open"];
-        
-        const parkMessage = <h4>Park {parkIsOpen ? "is" : "is not"} open</h4>
-        const liftMessage = <h4>Lift {liftIsOpen ? "is" : "is not"} open</h4>
-        return (
-            <div>
-                <h1>{name}</h1>
-                {parkMessage}
-                {liftIsOpen == null ? <></> : liftMessage}
-                <br />
-            </div>
-        )
+    return (
+       <div>{trails}</div>
+    )
+}
+
+export default class Region extends Component {
+
+    render() {
+        console.log(this.props.location.state)
+        return <TrailList json={this.props.location.state} />
     }
 }
+
