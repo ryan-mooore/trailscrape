@@ -26,10 +26,8 @@ const RegionList = () => {
          setRegions(
             json["regions"].map((region) => {
                return (
-                  <div>
+                  <div className={style.regionContainer}>
                      <RegionElement key={region.name} json={region}/>
-                        
-                     <br />
                   </div>
                )
             }))
@@ -53,25 +51,39 @@ const RegionElement = (props) => {
    if (Object.entries(props.json).length === 0) {
       return (
          <div className={style.regionElement}>
-            Park information not currently available
+            region information not currently available
          </div>
       )
 } else {
       const name = props.json["name"];
-      const parkMessage = <h4>Park {props.json["park_is_open"] ? "is" : "is not"} open</h4>
-      const liftMessage = <h4>Lift {props.json["lift_is_open"] ? "is" : "is not"} open</h4>
+      const liftIsOpen = props.json["lift_is_open"]
+      const parkIsOpen = props.json["park_is_open"]
          
       return (
          <div className={style.regionElement}>
-            <h1>{name}</h1>
-            {parkMessage}
-            {props.json["lift_is_open"] == null ? <></> : liftMessage}
-            <br />
-
             <Link to={{
-                           pathname: '/' + props.json["name"],
-                           state: props.json
-                        }}>Region Link</Link>
+               pathname: '/' + props.json["name"],
+               state: props.json
+            }}>
+               <h1>{name}</h1>
+               <div className={style.statusContainer}>
+                  <div className={style.status}>
+                     <div className={style.statusMessage}>park status</div>   
+                     <div className={style.statusIndicator} style={{backgroundColor: parkIsOpen ? "green" : "red"}}></div>
+                  </div>
+                  {liftIsOpen == null ?
+                     <></>
+                     :
+                     <>
+                        <div className={style.delimiter}></div>
+                        <div className={style.status}>
+                           <div className={style.statusMessage}>lift status</div>   
+                           <div className={style.statusIndicator} style={{backgroundColor: liftIsOpen ? "green" : "red"}}></div>
+                        </div>
+                     </>
+                  }
+               </div>
+            </Link>
          </div>
       )
    }
