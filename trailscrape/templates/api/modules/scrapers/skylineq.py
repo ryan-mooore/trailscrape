@@ -2,6 +2,7 @@ import re
 from .common import classes
 
 def run():
+
     try:
         skylineq = classes.Region()
         skylineq.name = "Skyline Queenstown"
@@ -18,18 +19,13 @@ def run():
         park_info_p = skylineq.soup.find(
             "p",
             text=re.compile(r"Skyline Gondola access to Queenstown Bike Park")
-        )
+        ).string
 
-        park_info = skylineq.parse(
-            r"Queenstown Bike Park\s(.+)",
-            park_info_p
-        ).upper()
-
-        if park_info == "OPEN":
+        if park_info_p.endswith("OPEN"):
             skylineq.park_is_open = True
             skylineq.lift_is_open = True
 
-        if park_info == "CLOSED":
+        if park_info_p.endswith("CLOSED"):
             skylineq.park_is_open = False
             skylineq.lift_is_open = False
 
@@ -85,4 +81,4 @@ def run():
     
     except Exception as e:
         print("skylineq:", e)
-        return "{}"
+        return "{\"name\": ${}}".format(skylineq.name)

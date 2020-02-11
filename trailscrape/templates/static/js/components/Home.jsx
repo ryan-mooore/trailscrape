@@ -1,7 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import Region from './Region'
 import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
-import style from '../../../public/css/home.css'
 
 function getJson(url, onReturn) {
    let xhr = new XMLHttpRequest();
@@ -17,20 +16,20 @@ function getJson(url, onReturn) {
 }
 
 const RegionList = () => {
-   const [regions, setRegions] = useState(<h1>Loading...</h1>);
+   const [regions, setRegions] = useState(
+      <div className="listContainer">
+         <h1>Loading...</h1>
+      </div>
+   );
 
    const updateData = () => {
-      
-      
       const response = (json) => {
+         let regions = json["regions"]
          setRegions(
-            json["regions"].map((region) => {
-               return (
-                  <div className={style.regionContainer}>
-                     <RegionElement key={region.name} json={region}/>
-                  </div>
-               )
-            }))
+            <div className="listContainer">
+               {regions.map((region) => <RegionElement key={region.name} json={region}/>)}
+            </div>
+            )
          }
       
       getJson('/', response)
@@ -50,7 +49,7 @@ const RegionElement = (props) => {
    
    if (Object.entries(props.json).length === 0) {
       return (
-         <div className={style.regionElement}>
+         <div className="regionElement">
             region information not currently available
          </div>
       )
@@ -60,25 +59,24 @@ const RegionElement = (props) => {
       const parkIsOpen = props.json["park_is_open"]
          
       return (
-         <div className={style.regionElement}>
+         <div className="regionElement">
             <Link to={{
                pathname: '/' + props.json["name"],
                state: props.json
             }}>
                <h1>{name}</h1>
-               <div className={style.statusContainer}>
-                  <div className={style.status}>
-                     <div className={style.statusMessage}>park status</div>   
-                     <div className={style.statusIndicator} style={{backgroundColor: parkIsOpen ? "green" : "red"}}></div>
+               <div className="statusContainer">
+                  <div className="status">
+                     <div className="statusMessage">park status</div>   
+                     <div className="statusIndicator" style={{backgroundColor: parkIsOpen ? "#2ecc71" : "#e74c3c"}}></div>
                   </div>
                   {liftIsOpen == null ?
                      <></>
                      :
                      <>
-                        <div className={style.delimiter}></div>
-                        <div className={style.status}>
-                           <div className={style.statusMessage}>lift status</div>   
-                           <div className={style.statusIndicator} style={{backgroundColor: liftIsOpen ? "green" : "red"}}></div>
+                        <div className="status">
+                           <div className="statusMessage">lift status</div>   
+                           <div className="statusIndicator" style={{backgroundColor: liftIsOpen ? "#2ecc71" : "#e74c3c"}}></div>
                         </div>
                      </>
                   }

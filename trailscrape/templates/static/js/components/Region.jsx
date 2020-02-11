@@ -1,15 +1,14 @@
 import React, { useState, useEffect, Component } from 'react';
-import Trail from './Trail';
 import { Link } from 'react-router-dom';
 
 const TrailList = (json) => {
-    const [trails, setTrails] = useState(<h1>load</h1>);
+    const [trails, setTrails] = useState(<h1>Loading...</h1>);
  
     const updateData = (json) => {
             setTrails (
-                json.map((trail) => {
-                    return <Trail key="" json={trail}/>
-                })
+                <div className="listContainer">
+                    {json.map((trail) => <Trail key="" json={trail}/>)}
+                </div>
             )
        }
  
@@ -22,11 +21,32 @@ const TrailList = (json) => {
     )
 }
 
+const Trail = (props) => {
+    const json = props.json;
+    const name = json["name"];
+    const grade = json["grade"];
+    const isOpen = json["is_open"];
+
+    let trailMessage = "Null"
+    if (isOpen === true) {
+        trailMessage = "Open";
+    } 
+    else if (isOpen === false) {
+        trailMessage = "Closed"
+    }
+
+    return (
+        <div className="trailElement">
+            <div className="trailName">{name}</div>
+            <div className="gradeIndicator">{grade}</div>
+            <div className="trailStatusIndicator" style={{backgroundColor: isOpen ? "#2ecc71" : "#e74c3c"}}></div>
+        </div>
+    )
+}
+
 export default class Region extends Component {
 
     render() {
-        console.log(this.props.location.state)
         return <TrailList json={this.props.location.state} />
     }
 }
-

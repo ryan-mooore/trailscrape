@@ -54,4 +54,4 @@ def run():
 
     except Exception as e:
         print("cap:", e)
-        return "{}"
+        return "{\"name\": ${}}".format(cap.name)

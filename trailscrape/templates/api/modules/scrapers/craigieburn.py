@@ -1,10 +1,10 @@
 from .common import classes
 
 def run():
-    try:
-        craigieburn = classes.Region()
-        craigieburn.name = "Craigieburn Trails"
+    craigieburn = classes.Region()
+    craigieburn.name = "Craigieburn Trails"
 
+    try:
         craigieburn.create_soup(
             "https://www.craigieburntrails.org.nz/track-status/",
             True
@@ -33,8 +33,7 @@ def run():
             parsed_status = None
 
             if status == "OPEN":
-                parsed_status = True
-                craigieburn.park_is_open == True
+                craigieburn.park_is_open = True
             
             if status == "CLOSED":
                 parsed_status = False
@@ -47,4 +46,4 @@ def run():
 
     except Exception as e:
         print("craigieburn:", e)
-        return "{}"
+        return "{\"name\": ${}}".format(craigieburn.name)

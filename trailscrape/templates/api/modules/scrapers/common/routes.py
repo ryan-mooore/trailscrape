@@ -1,4 +1,4 @@
-from .. import cap, craigieburn, skylineq, vic
+from .. import cap, craigieburn, skylineq, vic, halswell, glendhu
 import os
 
 def route():
@@ -6,5 +6,7 @@ def route():
         cap.run,
         craigieburn.run,
         skylineq.run,
-        vic.run
+        vic.run,
+        halswell.run,
+        glendhu.run
     ]
