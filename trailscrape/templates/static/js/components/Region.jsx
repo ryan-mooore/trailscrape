@@ -1,14 +1,27 @@
+//TODO:
+//remove whitespace from url
+//reroute region url to get trail info
+
 import React, { useState, useEffect, Component } from 'react';
 import { Link } from 'react-router-dom';
+import GradeLogo from '../assets/GradeLogo'
 
 const TrailList = (json) => {
+
     const [trails, setTrails] = useState(<h1>Loading...</h1>);
  
     const updateData = (json) => {
             setTrails (
-                <div className="listContainer">
-                    {json.map((trail) => <Trail key="" json={trail}/>)}
-                </div>
+                <>  
+                    <Link to="/">
+                        <div className="backButton">
+                            <i className="fas fa-chevron-left"></i>
+                        </div>
+                    </Link>
+                    <div className="trailsContainer">
+                        {json.map((trail) => <Trail key="" json={trail}/>)}
+                    </div>
+                </>
             )
        }
  
@@ -34,12 +47,24 @@ const Trail = (props) => {
     else if (isOpen === false) {
         trailMessage = "Closed"
     }
+    let trailStatusDiv = <div></div>
+    
+    if (isOpen) {
+        trailStatusDiv = <div className="trailStatusIndicator" style={{backgroundColor:"#2ecc71"}}>open</div>
+    } 
+    if (!isOpen) {
+        trailStatusDiv = <div className="trailStatusIndicator" style={{backgroundColor:"#e74c3c"}}>closed</div>
+    }
+
+    if (isOpen === null) {
+        trailStatusDiv = <div className="trailStatusIndicator" style={{backgroundColor:"#BABECC"}}>error</div>
+    }
 
     return (
         <div className="trailElement">
             <div className="trailName">{name}</div>
-            <div className="gradeIndicator">{grade}</div>
-            <div className="trailStatusIndicator" style={{backgroundColor: isOpen ? "#2ecc71" : "#e74c3c"}}></div>
+            <div className="gradeIndicator"><GradeLogo grade={grade}/></div>
+            {trailStatusDiv}
         </div>
     )
 }

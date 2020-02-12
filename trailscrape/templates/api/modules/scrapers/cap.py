@@ -34,7 +34,7 @@ def run():
             parsed_grade = cap.parse(r"(\b(?!\bHiking*\b)\w+\b)", grade)
             
             if parsed_grade:
-                parsed_grade = grades.index(parsed_grade[0].upper())
+                parsed_grade = grades.index(parsed_grade[0].upper()) + 1
             else:
                 parsed_grade = None
 

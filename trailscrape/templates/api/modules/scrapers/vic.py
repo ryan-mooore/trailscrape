@@ -27,13 +27,14 @@ def run():
         trail_list = trailforks.scrape("victoria-park")
 
         for trail in trail_list:
-            ccc.trails.append(
-                classes.Trail(
-                    trail.name,
-                    trail.grade, 
-                    ccc.park_is_open #if park is open, trails are open
+            if not trail.grade == -1:
+                ccc.trails.append(
+                    classes.Trail(
+                        trail.name,
+                        trail.grade, 
+                        ccc.park_is_open #if park is open, trails are open
+                    )
                 )
-            )
         
         return ccc.json_encode()
 

@@ -33,7 +33,7 @@ def run():
             parsed_status = None
 
             if status == "OPEN":
-                craigieburn.park_is_open = True
+                parsed_status = True
             
             if status == "CLOSED":
                 parsed_status = False

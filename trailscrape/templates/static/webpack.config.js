@@ -26,6 +26,10 @@ const config = {
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader?modules'
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
       }
     ]
   }

@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import Region from './Region'
-import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function getJson(url, onReturn) {
    let xhr = new XMLHttpRequest();

@@ -37,7 +37,7 @@ def scrape(region_name):
         #as there are 3 capture groups filter to the valid one
         if parsed_grade:
             parsed_grade = filter(None, parsed_grade)
-            for result in parsed_grade: parsed_grade = grades.index(result)
+            for result in parsed_grade: parsed_grade = grades.index(result) + 1
         else:
             parsed_grade = -1
         
