@@ -32,6 +32,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "history": "^4.10.1"
+    "history": "^4.10.1",
+    "react-transition-group": "^4.3.0"
   }
 }
