@@ -10,7 +10,7 @@ pylint = "*"
 flask = "*"
 requests = "*"
 bs4 = "*"
-selenium = "8"
+selenium = "*"
 
 [requires]
 python_version = "3.7"
