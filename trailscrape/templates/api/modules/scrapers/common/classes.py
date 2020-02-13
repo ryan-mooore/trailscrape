@@ -3,7 +3,6 @@ import json
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
-import dryscrape
 import time
 
 class Trail:
