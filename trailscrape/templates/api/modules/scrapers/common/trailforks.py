@@ -45,6 +45,6 @@ def scrape(region_id):
         status = raw_status is not "CLOSED / RED"
 
 
-        trails.append((name, grade, status))
+        trails.append(classes.Trail(name, grade, status))
 
     return trails

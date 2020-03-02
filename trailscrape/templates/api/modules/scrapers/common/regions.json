@@ -6,7 +6,7 @@
     "url": "https://www.christchurchadventurepark.com/trail-information",
     "trailforksRegionID": "christchurch-adventure-park",
     "hasUplifts": true,
-    "included": {
+    "includes": {
         "name": true,
         "grade": true,
         "status": true,

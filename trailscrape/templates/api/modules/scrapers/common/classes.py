@@ -21,8 +21,8 @@ class Trail:
 class RegionHelper:
     def __init__(self, _json, _tfdata, _class, scraper_module):
         self._json = _json
+        self._data = data
         self._tfdata = _tfdata
-        self._class = _class
         self._module = scraper_module
 
 class Region:
