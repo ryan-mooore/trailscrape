@@ -18,6 +18,13 @@ class Trail:
             is_open=self.is_open
         ) 
 
+class RegionHelper:
+    def __init__(self, _json, _tfdata, _class, scraper_module):
+        self._json = _json
+        self._tfdata = _tfdata
+        self._class = _class
+        self._module = scraper_module
+
 class Region:
     def __init__(self):
         self.name = None
@@ -32,22 +39,6 @@ class Region:
             lift_is_open=self.lift_is_open,
             trails=self.trails
         )
-        
-    def create_soup(self, url, dynamic=False):
-        #try:
-        if dynamic:
-            options = webdriver.ChromeOptions()
-            options.add_argument("headless")
-            driver = webdriver.Chrome(options=options)
-            driver.get(url)
-            time.sleep(2)
-            self.soup = BeautifulSoup(driver.page_source, "lxml")
-            driver.close()
-        else:
-            content = requests.get(url)
-            self.soup = BeautifulSoup(content.text, "html.parser")
-        #except:
-        #raise Exception("RequestError 4xx")
         
     def json_encode(self):
         return json.dumps(self, default=lambda obj: obj.reprJSON())
