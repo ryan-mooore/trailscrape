@@ -1,4 +1,3 @@
-import classes
 from bs4 import BeautifulSoup
 import re, requests
 
@@ -32,7 +31,6 @@ def scrape(region_id):
     for row in table.find_all("tr"):
         name = row.find_all("td")[1].a.string
 
-
         raw_grade = row.find_all("td")[0].span.get("title").upper()
         res = re.match(r"(?:(.+)\s\/.+|(.+):\s.+)|,\s(.+)", raw_grade)
         if res:
@@ -44,7 +42,11 @@ def scrape(region_id):
         raw_status = row.find_all("td")[2].span.get("title").upper()
         status = raw_status is not "CLOSED / RED"
 
-
-        trails.append(classes.Trail(name, grade, status))
+        trails.append({
+            "id": None,
+            "name": name,
+            "grade": grade,
+            "isOpen": status
+        })
 
     return trails

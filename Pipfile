@@ -11,6 +11,7 @@ flask = "*"
 requests = "*"
 bs4 = "*"
 selenium = "*"
+lxml = "*"
 
 [requires]
 python_version = "3.7"

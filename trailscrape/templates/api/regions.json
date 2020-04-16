@@ -1,0 +1,83 @@
+[
+    {
+        "name": "Christchurch Adventure Park",
+        "moduleID": "cap",
+        "scrapeWithDriver": false,
+        "url": "https://www.christchurchadventurepark.com/trail-information",
+        "trailforksRegionID": "christchurch-adventure-park",
+        "hasUplifts": true,
+        "includes": 
+        {
+            "park": 
+            {
+                "parkStatus": false,
+                "liftStatus": false
+            },
+            "trails": {
+                "name": true,
+                "grade": true,
+                "status": true
+            }
+        }
+    },
+    {
+        "name": "Craigieburn Trails",
+        "moduleID": "cgb",
+        "scrapeWithDriver": false,
+        "url": "https://www.craigieburntrails.org.nz/track-status/",
+        "trailforksRegionID": "craigieburn-trails",
+        "hasUplifts": false,
+        "includes": 
+        {
+            "park": 
+            {
+                "parkStatus": false
+            },
+            "trails": {
+                "name": true,
+                "grade": false,
+                "status": true
+            }
+        }
+    },
+    {
+        "name": "Crocodile XC MTB Park",
+        "moduleID": "crc",
+        "scrapeWithDriver": true,
+        "url": "https://www.trackstatus.co.nz/",
+        "trailforksRegionID": "crocodile-xc-mtb-park",
+        "hasUplifts": false,
+        "includes": 
+        {
+            "park": 
+            {
+                "parkStatus": true
+            },
+            "trails": {
+                "name": false,
+                "grade": false,
+                "status": false
+            }
+        }
+    },
+    {
+        "name": "Victoria Park",
+        "moduleID": "vic",
+        "scrapeWithDriver": true,
+        "url": "https://www.trackstatus.co.nz/",
+        "trailforksRegionID": "victoria-park",
+        "hasUplifts": false,
+        "includes": 
+        {
+            "park": 
+            {
+                "parkStatus": true
+            },
+            "trails": {
+                "name": false,
+                "grade": false,
+                "status": false
+            }
+        }
+    }
+]
