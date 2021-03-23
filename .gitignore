@@ -9,7 +9,6 @@ Pipfile.lock
 package-lock.json
 node_modules
 
-public
 scraper_tests
 
 dev
