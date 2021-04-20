@@ -23,7 +23,7 @@ def get_trails(soup):
 
         if raw_status == "OPEN":
             status = True
-            craigieburn.park_is_open = True
+            craigieburn.parkIsOpen = True
         
         if raw_status == "CLOSED":
             status = False
