@@ -3,16 +3,14 @@ import StatusBadge from "./status-badge";
 const StatusInfo = (props) => {
   return (
     <div className="flex flex-row gap-6">
-      {props.liftIsOpen !== undefined && (
-        <div className="invisible xs:visible flex flex-row gap-3 items-center text-gray-400">
-          <div>lift</div>
-          <StatusBadge open={props.liftIsOpen} />
+      {Object.entries(props.status).map(([k, v]) => (
+        <div key={k} className="flex flex-row gap-3 items-center text-gray-400">
+          <div className="invisible xs:visible">{k}</div>
+          <div className={k === "lift" ? "invisible xs:visible" : undefined}>
+            <StatusBadge open={v} />
+          </div>
         </div>
-      )}
-      <div className="flex flex-row gap-3 items-center text-gray-400">
-        <div className="invisible xs:visible">{props.parkIsOpen && "park"}</div>
-        <StatusBadge open={props.parkIsOpen ? props.parkIsOpen : props.isOpen} />
-      </div>
+      ))}
     </div>
   );
 };

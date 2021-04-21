@@ -16,7 +16,13 @@ const TrailCard = (props) => {
           <h1 className="text-lg text-gray-400">{name}</h1>
         </div>
       }
-      right={<StatusInfo isOpen={isOpen} />}
+      right={
+        <StatusInfo
+          status={{
+            "": isOpen
+          }}
+        />
+      }
     />
   );
 };

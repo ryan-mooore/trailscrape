@@ -3,6 +3,12 @@ import Card from "../../shared/card";
 
 const RegionCard = (props) => {
   const status = props.json;
+  let stat = {};
+  if (status["liftIsOpen"] !== undefined) {
+    stat["lift"] = status["liftIsOpen"];
+  }
+  stat["park"] = status["parkIsOpen"];
+
   if (Object.entries(status).length === 0) {
     return (
       <>
@@ -23,12 +29,7 @@ const RegionCard = (props) => {
             {status["name"]}
           </h1>
         }
-        right={
-          <StatusInfo
-            liftIsOpen={status["liftIsOpen"]}
-            parkIsOpen={status["parkIsOpen"]}
-          />
-        }
+        right={<StatusInfo status={stat} />}
       />
     );
   }
