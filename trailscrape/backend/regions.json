@@ -1,7 +1,7 @@
 [
     {
         "name": "Christchurch Adventure Park",
-        "moduleID": "cap",
+        "ID": "cap",
         "scrapeWithDriver": false,
         "url": "https://www.christchurchadventurepark.com/trail-information",
         "trailforksRegionID": "christchurch-adventure-park",
@@ -22,7 +22,7 @@
     },
     {
         "name": "Craigieburn Trails",
-        "moduleID": "cgb",
+        "ID": "cgb",
         "scrapeWithDriver": false,
         "url": "https://www.craigieburntrails.org.nz/track-status/",
         "trailforksRegionID": "craigieburn-trails",
@@ -42,7 +42,7 @@
     },
     {
         "name": "Crocodile XC MTB Park",
-        "moduleID": "crc",
+        "ID": "crc",
         "scrapeWithDriver": true,
         "url": "https://www.trackstatus.co.nz/",
         "trailforksRegionID": "crocodile-xc-mtb-park",
@@ -62,7 +62,7 @@
     },
     {
         "name": "Victoria Park",
-        "moduleID": "vic",
+        "ID": "vic",
         "scrapeWithDriver": true,
         "url": "https://www.trackstatus.co.nz/",
         "trailforksRegionID": "victoria-park",

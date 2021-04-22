@@ -2,31 +2,33 @@ import StatusInfo from "../../shared/status-info";
 import Card from "../../shared/card";
 
 const RegionCard = (props) => {
-  const status = props.json;
   let stat = {};
-  if (status["liftIsOpen"] !== undefined) {
-    stat["lift"] = status["liftIsOpen"];
+  if (props.region.includes.park.liftStatus) {
+    stat.lift = props.status.liftIsOpen;
   }
-  stat["park"] = status["parkIsOpen"];
+  stat.park = props.status.parkIsOpen;
 
-  if (Object.entries(status).length === 0) {
+  if (props.status.scrapeError) {
     return (
-      <>
-        {"region information for " + status["name"]
-          ? status["name"]
-          : "Unknown Park not currently available"}
-      </>
+      <Card
+        left={
+          <h1 className="text-lg text-gray-400 pt-2 pb-4 sm:p-0">
+            {`Sorry, status for ${props.region.name} not currently available.`}
+          </h1>
+        }
+        right={<StatusInfo status={{ park: null }} />}
+      />
     );
   } else {
     return (
       <Card
         link={{
-          pathname: "/" + status["name"],
-          state: status,
+          pathname: "/" + props.region.ID,
+          state: { region: props.region, status: props.status },
         }}
         left={
           <h1 className="text-lg text-gray-400 pt-2 pb-4 sm:p-0">
-            {status["name"]}
+            {props.region.name}
           </h1>
         }
         right={<StatusInfo status={stat} />}

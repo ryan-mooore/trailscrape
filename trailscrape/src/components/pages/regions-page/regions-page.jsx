@@ -14,12 +14,11 @@ const RegionList = () => {
     fetch("http://localhost:9000/trails")
       .then((res) => res.json())
       .then(
-        (json) => {
-          let regions = json["regions"];
+        (regions) => {
           setRegions(
             <List
-              elements={regions.map((region) => (
-                <RegionCard key={region.name} json={region} />
+              elements={regions.regions.map((region) => (
+                <RegionCard key={region.region.ID} status={region.status} region={region.region}/>
               ))}
             />
           );

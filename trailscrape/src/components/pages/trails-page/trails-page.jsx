@@ -4,20 +4,18 @@ import Title from "../../shared/title";
 import List from "../../shared/list";
 import TrailCard from "./trail-card";
 
-const TrailList = (json) => {
+const TrailList = (props) => {
   const [trails, setTrails] = useState(<h1>Loading...</h1>);
 
   useEffect(() => {
-    let park = json.json;
-    console.log(park);
     setTrails(
       <List
-        elements={park.trails.map((trail) => (
-          <TrailCard key="" json={trail} />
+        elements={props.status.trails.map((trail) => (
+          <TrailCard key="" region={props.region} trail={trail} />
         ))}
       />
     );
-  }, [json]);
+  }, []);
 
   return trails;
 };
@@ -37,10 +35,10 @@ export default class TrailsPage extends Component {
         <Title
           title="Trails"
           offset="-0.5"
-          subtitle={`at ${this.props.location.state.name}`}
+          subtitle={`at ${this.props.location.state.region.name}`}
           icon="map"
         />
-        <TrailList json={this.props.location.state} />
+        <TrailList region={this.props.location.state.region} status={this.props.location.state.status} />
       </div>
     );
   }

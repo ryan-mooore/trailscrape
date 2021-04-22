@@ -3,12 +3,9 @@ __pycache__
 
 .vscode
 
-templates/static/node_modules/
-
 Pipfile.lock
 package-lock.json
+
 node_modules
-
 scraper_tests
-
 dev

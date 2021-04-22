@@ -1,12 +1,40 @@
 var express = require('express');
 
 
-const data = require('../../backend/db/status.json');
-
 var router = express.Router();
+var MongoClient = require('mongodb').MongoClient;
 
-router.get('/', function(req, res, next) {
 
-    res.send({"regions": data, "error": false});
+router.get('/', function (req, response, next) {
+    MongoClient.connect("mongodb://localhost:27017/trailscrape", (err, client) => {
+        if (err) throw err;
+        var db = client.db('trailscrape');
+
+        let json = { regions: [] };
+        let statuses;
+        let regions;
+
+        db.collection("region_status").find().toArray((err, res) => {
+            if (err) throw err;
+            statuses = res;
+            db.collection("region").find().toArray((err, res) => {
+                if (err) throw err;
+                regions = res;
+
+                for (let status of statuses) {
+                    for (let region of regions) {
+                        if (region.ID === status.ID) {
+                            json.regions.push({
+                                status: status,
+                                region: region
+                            });
+                        }
+                    }
+                }
+
+                response.send(json);
+            });
+        });
+    });
 });
 module.exports = router;
