@@ -27,6 +27,7 @@ def scrape(region_id):
     trails = []
 
     table = get_table(region_id)
+    id = 0
 
     for row in table.find_all("tr"):
         name = row.find_all("td")[1].a.string
@@ -43,10 +44,11 @@ def scrape(region_id):
         status = raw_status is not "CLOSED / RED"
 
         trails.append({
-            "id": None,
+            "id": id,
             "name": name,
             "grade": grade,
             "isOpen": status
         })
+        id += 1
 
     return trails

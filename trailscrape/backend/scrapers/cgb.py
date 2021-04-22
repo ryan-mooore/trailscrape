@@ -12,6 +12,8 @@ def get_trails(soup):
             continue
         name = row.find_all("td")[0].a.string
         status_src = row.find_all("td")[1].img.get("src")
+    if not trails:
+        raise IndexError
 
         #closed-icon or open-icon
         raw_status = craigieburn.parse(

@@ -133,6 +133,7 @@ if __name__ == "__main__":
     for region in documents.Region.objects:
         try:
             region_status = documents.RegionStatus.objects(ID=region.ID)[0]
+            region_status.scrapeError = False
         except IndexError:
             region_status = documents.RegionStatus(
                 ID=region.ID, scrapeError=False)

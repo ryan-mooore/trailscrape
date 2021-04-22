@@ -15,7 +15,7 @@ const TrailList = (props) => {
     setTrails(
       <List
         disclaimer={props.disclaimer}
-        elements={props.status.trails.map((trail) => (
+        elements={props.status.trails.filter((trail) => trail.grade).map((trail) => (
           <TrailCard key={trail.id} trail={trail} />
         ))}
       />

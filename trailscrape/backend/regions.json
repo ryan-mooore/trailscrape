@@ -23,7 +23,7 @@
     {
         "name": "Craigieburn Trails",
         "ID": "cgb",
-        "scrapeWithDriver": false,
+        "scrapeWithDriver": true,
         "url": "https://www.craigieburntrails.org.nz/track-status/",
         "trailforksRegionID": "craigieburn-trails",
         "hasUplifts": false,
