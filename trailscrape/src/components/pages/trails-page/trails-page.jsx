@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import Title from "../../shared/title";
 import List from "../../shared/list";
 import TrailCard from "./trail-card";
+import Message from "../../shared/message";
 
 const TrailList = (props) => {
   const [trails, setTrails] = useState(
-    <div className="invisible">
-      <h1>Loading...</h1>
-    </div>
+    <Message text="Loading..." invisible />
   );
 
   useEffect(() => {

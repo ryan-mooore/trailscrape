@@ -2,12 +2,11 @@ import React, { Component, useEffect, useState } from "react";
 import RegionCard from "./region-card";
 import Title from "../../shared/title";
 import List from "../../shared/list";
+import Message from "../../shared/message";
 
 const RegionList = () => {
   const [regions, setRegions] = useState(
-    <div className="invisible">
-      <h1>Loading...</h1>
-    </div>
+    <Message text="Loading..." invisible />
   );
 
   useEffect(() => {
@@ -25,11 +24,7 @@ const RegionList = () => {
         },
         (error) => {
           console.log(error);
-          setRegions(
-            <div className="text-gray-500 text-xl top-0 absolute h-screen w-screen flex flex-row justify-center items-center">
-              <h1>Sorry, the API is currently down.</h1>
-            </div>
-          );
+          setRegions(<Message text="Sorry, the API is currently down."/>);
         }
       );
   }, []);

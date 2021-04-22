@@ -8,6 +8,4 @@ ReactDOM.render(<Routes />, document.getElementById("root"));
 // TODO:
 // add api support for routing directly to subpage
 // page view for a unavailable park?
-// 404
-// footer
 // seo
