@@ -5,7 +5,11 @@ import List from "../../shared/list";
 import TrailCard from "./trail-card";
 
 const TrailList = (props) => {
-  const [trails, setTrails] = useState(<h1>Loading...</h1>);
+  const [trails, setTrails] = useState(
+    <div className="invisible">
+      <h1>Loading...</h1>
+    </div>
+  );
 
   useEffect(() => {
     setTrails(
@@ -50,7 +54,7 @@ export default class TrailsPage extends Component {
     return (
       <div>
         <Link to="/">
-          <div className="absolute flex flex-row items-center text-gray-500 pl-4 pt-4">
+          <div className="fixed top-0 left-0 flex flex-row items-center text-gray-500 pl-4 pt-4">
             <div className="material-icons-round text-3xl">arrow_back_ios</div>
             <div className="flex flex-row  items-center">
               <div className="invisible sm:visible">back</div>
@@ -75,20 +79,25 @@ export default class TrailsPage extends Component {
                   )}
                 </a>
               </div>
-              {unreliableSources.length > 0 ? (<>
-                <div>
-                  {`${
-                    unreliableSourcesStr[0].toUpperCase() +
-                    unreliableSourcesStr.slice(1)
-                  } data sourced from `}
-                  <a
-                    className="underline"
-                    href={`https://www.trailforks.com/region/${this.props.location.state.region.trailforksRegionID}`}
-                  >
-                    {`${this.props.location.state.region.trailforksRegionID} on Trailforks`}
-                  </a>
-                </div>
-                <div>NB: Trailforks data provides 3rd party trail information and is subject to inaccuracy</div></>
+              {unreliableSources.length > 0 ? (
+                <>
+                  <div>
+                    {`${
+                      unreliableSourcesStr[0].toUpperCase() +
+                      unreliableSourcesStr.slice(1)
+                    } data sourced from `}
+                    <a
+                      className="underline"
+                      href={`https://www.trailforks.com/region/${this.props.location.state.region.trailforksRegionID}`}
+                    >
+                      {`${this.props.location.state.region.trailforksRegionID} on Trailforks`}
+                    </a>
+                  </div>
+                  <div>
+                    NB: Trailforks data provides 3rd party trail information and
+                    is subject to inaccuracy
+                  </div>
+                </>
               ) : undefined}
             </div>
           }

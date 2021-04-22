@@ -5,7 +5,7 @@ import List from "../../shared/list";
 
 const RegionList = () => {
   const [regions, setRegions] = useState(
-    <div className="listContainer">
+    <div className="invisible">
       <h1>Loading...</h1>
     </div>
   );
