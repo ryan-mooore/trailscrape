@@ -10,8 +10,9 @@ const TrailList = (props) => {
   useEffect(() => {
     setTrails(
       <List
+        disclaimer={props.disclaimer}
         elements={props.status.trails.map((trail) => (
-          <TrailCard key="" region={props.region} trail={trail} />
+          <TrailCard key={trail.id} trail={trail} />
         ))}
       />
     );
@@ -22,6 +23,30 @@ const TrailList = (props) => {
 
 export default class TrailsPage extends Component {
   render() {
+    const region = this.props.location.state.region;
+    const status = this.props.location.state.status;
+
+    const arrRepr = (arr) => {
+      switch (arr.length) {
+        case 1:
+          return `${arr[0]}`;
+        case 2:
+          return `${arr[0]} and ${arr[1]}`;
+        case 3:
+          return `${arr[0]}, ${arr[1]} and ${arr[2]}`;
+        default:
+          return "";
+      }
+    };
+
+    const unreliableSources = Object.entries(region.includes.trails).filter(
+      ([info, val]) => !val
+    );
+
+    const unreliableSourcesStr = arrRepr(
+      unreliableSources.map(([info, val]) => info)
+    );
+
     return (
       <div>
         <Link to="/">
@@ -35,10 +60,40 @@ export default class TrailsPage extends Component {
         <Title
           title="Trails"
           offset="-0.5"
-          subtitle={`at ${this.props.location.state.region.name}`}
+          subtitle={`at ${region.name}`}
           icon="map"
         />
-        <TrailList region={this.props.location.state.region} status={this.props.location.state.status} />
+        <TrailList
+          disclaimer={
+            <div>
+              <div>
+                {"Data sourced from "}
+                <a className="underline" href={region.url}>
+                  {region.url.replace(
+                    /(^\w+:|^)\/\/(w{3}\.)*([^/]*)\/*.*$/,
+                    "$3"
+                  )}
+                </a>
+              </div>
+              {unreliableSources.length > 0 ? (<>
+                <div>
+                  {`${
+                    unreliableSourcesStr[0].toUpperCase() +
+                    unreliableSourcesStr.slice(1)
+                  } data sourced from `}
+                  <a
+                    className="underline"
+                    href={`https://www.trailforks.com/region/${this.props.location.state.region.trailforksRegionID}`}
+                  >
+                    {`${this.props.location.state.region.trailforksRegionID} on Trailforks`}
+                  </a>
+                </div>
+                <div>NB: Trailforks data provides 3rd party trail information and is subject to inaccuracy</div></>
+              ) : undefined}
+            </div>
+          }
+          status={this.props.location.state.status}
+        />
       </div>
     );
   }
