@@ -1,0 +1,20 @@
+{
+  "short_name": "NZ Trail Status",
+  "name": "NZ Trail Status",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "theme_color": "#e5e7eb",
+  "background_color": "#e5e7eb",
+  "display": "standalone"
+}
