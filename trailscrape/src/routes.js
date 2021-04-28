@@ -1,23 +1,36 @@
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { AnimatedSwitch } from 'react-router-transition';
+import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom';
 import NoMatchPage from './components/pages/no-match-page/no-match-page';
 import RegionsPage from './components/pages/regions-page/regions-page';
 import TrailsPage from './components/pages/trails-page/trails-page';
+import {
+    TransitionGroup,
+    CSSTransition
+} from "react-transition-group";
 
-const Routes = () => (
+const App = () => (
     <Router>
-        <AnimatedSwitch
-            atEnter={{ opacity: 0.5 }}
-            atLeave={{ opacity: 0 }}
-            atActive={{ opacity: 1 }}
-            className="switch-wrapper"
-        >
-            <Route exact path='/' component={RegionsPage} />
-            <Route path='/:region' component={TrailsPage} />
-            <Route path='*' component={NoMatchPage} />
-        </AnimatedSwitch>
-
+        <Routes />
     </Router>
 )
 
-export default Routes;
+
+const Routes = () => {
+
+    return (
+        <div>
+            <TransitionGroup>
+                <CSSTransition 
+                    classNames="fade"
+                    timeout={500}>
+                    <Switch  >
+                        <Route exact path='/' component={RegionsPage} />
+                        <Route path='/:region' component={TrailsPage} />
+                        <Route path='*' component={NoMatchPage} />
+                    </Switch>
+                </CSSTransition>
+
+            </TransitionGroup>
+        </div>
+    )
+}
+export default App;

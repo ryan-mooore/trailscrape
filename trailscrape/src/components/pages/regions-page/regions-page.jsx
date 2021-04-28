@@ -11,7 +11,6 @@ const RegionList = (props) => {
 
   useEffect(() => {
     if (props.regions !== undefined) {
-      console.log(props.regions);
       return setRegions(
         <List
           elements={props.regions.regions.map((region) => (
@@ -53,7 +52,6 @@ const RegionList = (props) => {
 };
 
 const RegionsPage = (props) => {
-  console.log(props.history.location)
   return (
     <div>
       <Title title="Regions" icon="landscape" offset="1.5" />
