@@ -37,4 +37,18 @@ router.get('/', function (req, response, next) {
         });
     });
 });
+
+router.get('/:regionID', function (req, res, next) {
+    MongoClient.connect("mongodb://localhost:27017/trailscrape", (err, client) => {
+        if (err) throw err;
+        var db = client.db('trailscrape');
+        db.collection("region_status").findOne({ ID: req.params.regionID }, (err, status) => {
+            db.collection("region").findOne({ ID: req.params.regionID }, (err, region) => {
+                res.send({ region: region, status: status })
+            })
+        })
+    }
+    )
+}
+);
 module.exports = router;
