@@ -5,18 +5,3 @@
 @import url('https://fonts.googleapis.com/css2?family=Biryani:wght@200;300;400;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons+Round');
-
-.switch-wrapper {
-    position: relative;
-  }
-  
-  .switch-wrapper > div {
-    position: absolute;
-    width: 100%;
-  }
-
-body {
-    margin-left: calc(100vw - 100%);
-    margin-right: 0;
-    position: static;
-}
