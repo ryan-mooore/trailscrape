@@ -2,7 +2,6 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "react-router-dom": "^5.2.0",
-    "react-router-transition": "^2.1.0",
     "react-transition-group": "^4.4.1"
   }
 }

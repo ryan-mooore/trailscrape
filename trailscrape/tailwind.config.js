@@ -7,7 +7,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      'sans': ['montserrat'],
+      'sans': ['montserrat', defaultTheme.fontFamily.sans]
     },
       screens: {
         'xs': '380px',
