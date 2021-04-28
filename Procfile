@@ -1,1 +1,1 @@
-web: cd trailscrape && npm start
+web: cd trailscrape/src && npm start
