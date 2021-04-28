@@ -32,7 +32,7 @@ router.get('/', function (req, response, next) {
                     }
                 }
 
-                response.send(json);
+                return response.send(json);
             });
         });
     });
@@ -44,7 +44,11 @@ router.get('/:regionID', function (req, res, next) {
         var db = client.db('trailscrape');
         db.collection("region_status").findOne({ ID: req.params.regionID }, (err, status) => {
             db.collection("region").findOne({ ID: req.params.regionID }, (err, region) => {
-                res.send({ region: region, status: status })
+                if (status === null || region === null) {
+                    res.statusCode = 404;
+                    return res.send("The specified region does not exist.")
+                }
+                return res.send({ region: region, status: status })
             })
         })
     }

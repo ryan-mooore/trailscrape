@@ -1,44 +1,65 @@
-import React, { Component, useEffect, useState } from "react";
-import RegionCard from "./region-card";
-import Title from "../../shared/title";
+import React, { useEffect, useState } from "react";
 import List from "../../shared/list";
 import Message from "../../shared/message";
+import Title from "../../shared/title";
+import RegionCard from "./region-card";
 
-const RegionList = () => {
+const RegionList = (props) => {
   const [regions, setRegions] = useState(
     <Message text="Loading..." invisible />
   );
 
   useEffect(() => {
-    fetch("http://localhost:9000/trails")
-      .then((res) => res.json())
-      .then(
-        (regions) => {
-          setRegions(
-            <List
-              elements={regions.regions.map((region) => (
-                <RegionCard key={region.region.ID} status={region.status} region={region.region}/>
-              ))}
+    if (props.regions !== undefined) {
+      console.log(props.regions);
+      return setRegions(
+        <List
+          elements={props.regions.regions.map((region) => (
+            <RegionCard
+              key={region.region.ID}
+              status={region.status}
+              region={region.region}
+              regions={props.regions}
             />
-          );
-        },
-        (error) => {
-          console.log(error);
-          setRegions(<Message text="Sorry, the API is currently down."/>);
-        }
+          ))}
+        />
       );
-  }, []);
+    } else {
+      fetch("http://localhost:9000/trails")
+        .then((res) => res.json())
+        .then(
+          (regions) => {
+            setRegions(
+              <List
+                elements={regions.regions.map((region) => (
+                  <RegionCard
+                    key={region.region.ID}
+                    status={region.status}
+                    region={region.region}
+                    regions={regions}
+                  />
+                ))}
+              />
+            );
+          },
+          (error) => {
+            setRegions(<Message text="Sorry, the API is currently down." />);
+          }
+        );
+    }
+  }, [props.state, props.regions]);
 
   return regions;
 };
 
-export default class RegionsPage extends Component {
-  render() {
-    return (
-      <div>
-        <Title title="Regions" icon="landscape" offset="1.5" />
-        <RegionList key="list" />
-      </div>
-    );
-  }
-}
+const RegionsPage = (props) => {
+  console.log(props.history.location)
+  return (
+    <div>
+      <Title title="Regions" icon="landscape" offset="1.5" />
+      <RegionList key="list" regions={props.history.location.state?.regions} />
+    </div>
+  );
+};
+
+export default RegionsPage;

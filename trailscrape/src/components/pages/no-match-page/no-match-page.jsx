@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Message from "../../shared/message";
 
-export default class NoMatchPage extends Component {
-  render() {
-    return <Message text="Page not found" />;
-  }
+const NoMatchPage = (props) => {
+  return <Message text={`Sorry, the region '${props.page}' could not be found.`} />;
 }
+
+export default NoMatchPage;
