@@ -1,5 +1,5 @@
 {
-"scripts": {
+  "scripts": {
     "api": "cd trailscrape/api && npm start",
     "api:build": "cd trailscrape/api && npm install && npm start",
     "client": "cd trailscrape/client && npm start",

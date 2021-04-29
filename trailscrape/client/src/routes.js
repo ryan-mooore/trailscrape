@@ -14,10 +14,10 @@ const App = () => (
 )
 
 const Footer = () => (
-    <footer class="absolute bottom-0 h-10 w-full bg-gray-500 hidden sm:flex flex-row justify-between items-center pl-5 pr-5 text-gray-400 text-sm">
+    <footer className="absolute bottom-0 h-10 w-full bg-gray-500 hidden sm:flex flex-row justify-between items-center pl-5 pr-5 text-gray-400 text-sm">
         <div>&copy; Copyright Ryan Moore, {new Date().getFullYear()}</div>
-        <div><a href="https://github.com/ryan-mooore/trailscrape"><img src={GHMark} alt="link to GitHub repository" height="25" width="25" class="fill-current"></img></a></div>
-        <div><a href="https://forms.gle/dngABSxNa2et5fpD6" class="underline">Suggest a park to be added</a></div>
+        <div><a href="https://github.com/ryan-mooore/trailscrape"><img src={GHMark} alt="link to GitHub repository" height="25" width="25"></img></a></div>
+        <div><a href="https://forms.gle/dngABSxNa2et5fpD6" className="underline">Suggest a park to be added</a></div>
     </footer>
 )
 

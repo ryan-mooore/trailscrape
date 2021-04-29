@@ -3,7 +3,8 @@ var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 
-const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/trailscrape";
+
+var uri = process.env.MONGODB_URI || "mongodb://localhost:27017/trailscrape";
 
 router.get('/', function (req, response, next) {
     MongoClient.connect(uri, (err, client) => {

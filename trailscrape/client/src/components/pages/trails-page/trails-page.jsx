@@ -40,7 +40,7 @@ const TrailsPage = (props) => {
 
     if (httpStatusCode === undefined) {
       if (props.location.state === undefined) {
-        fetch(`http://localhost:9000/trails/${params.region}`)
+        fetch(`/api/${params.region}`)
           .then((res) => {
             setHttpStatusCode(res.status);
             return res.json();

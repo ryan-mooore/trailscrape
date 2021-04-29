@@ -24,7 +24,7 @@ const RegionList = (props) => {
         />
       );
     } else {
-      fetch("http://localhost:9000/trails")
+      fetch("/api")
         .then((res) => res.json())
         .then(
           (regions) => {
