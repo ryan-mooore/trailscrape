@@ -7,7 +7,10 @@ const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/trailscrape";
 
 router.get('/', function (req, response, next) {
     MongoClient.connect(uri, (err, client) => {
-        if (err) throw err;
+        if (err) {
+            console.log(err);
+            throw err;
+        }
         var db = client.db('trailscrape');
 
         let json = { regions: [] };
@@ -15,10 +18,16 @@ router.get('/', function (req, response, next) {
         let regions;
 
         db.collection("region_status").find().toArray((err, res) => {
-            if (err) throw err;
+            if (err) {
+                console.log(err);
+                throw err;
+            }
             statuses = res;
             db.collection("region").find().toArray((err, res) => {
-                if (err) throw err;
+                if (err) {
+                    console.log(err);
+                    throw err;
+                }
                 regions = res;
 
                 for (let status of statuses) {
@@ -40,7 +49,10 @@ router.get('/', function (req, response, next) {
 
 router.get('/:regionID', function (req, res, next) {
     MongoClient.connect(uri, (err, client) => {
-        if (err) throw err;
+        if (err) {
+            console.log(err);
+            throw err;
+        }
         var db = client.db('trailscrape');
         db.collection("region_status").findOne({ ID: req.params.regionID }, (err, status) => {
             db.collection("region").findOne({ ID: req.params.regionID }, (err, region) => {
