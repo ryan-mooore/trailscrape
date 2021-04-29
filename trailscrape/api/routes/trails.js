@@ -3,9 +3,10 @@ var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 
+const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/trailscrape";
 
 router.get('/', function (req, response, next) {
-    MongoClient.connect("mongodb://localhost:27017/trailscrape", (err, client) => {
+    MongoClient.connect(uri, (err, client) => {
         if (err) throw err;
         var db = client.db('trailscrape');
 
@@ -38,7 +39,7 @@ router.get('/', function (req, response, next) {
 });
 
 router.get('/:regionID', function (req, res, next) {
-    MongoClient.connect("mongodb://localhost:27017/trailscrape", (err, client) => {
+    MongoClient.connect(uri, (err, client) => {
         if (err) throw err;
         var db = client.db('trailscrape');
         db.collection("region_status").findOne({ ID: req.params.regionID }, (err, status) => {

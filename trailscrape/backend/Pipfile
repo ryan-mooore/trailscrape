@@ -15,6 +15,7 @@ lxml = "*"
 pymongo = "*"
 dnspython = "*"
 webdriver-manager = "*"
+boto = "*"
 
 [requires]
 python_version = "3.9"

@@ -1,13 +1,11 @@
 from json import load
-from os import path
-
+from os import path, environ
 from mongoengine import connect
 from mongoengine.document import Document
 from mongoengine.fields import (BooleanField, DictField, ListField,
                                 StringField, URLField)
 
-client = connect(db="trailscrape", host="localhost", port=27017)
-
+client = connect(db="trailscrape", host=environ['MONGODB_URI'] if environ['MONGODB_URI'] else 'localhost', port=27017)
 
 class Region(Document):
     ID = StringField(required=True, unique=True, max_length=3)
@@ -28,7 +26,7 @@ class RegionStatus(Document):
 
 
 def create_regions():
-    with open(path.join(path.dirname(__file__), '../db/regions.json'), 'r') as regions:
+    with open(path.join(path.dirname(__file__), '../regions.json'), 'r') as regions:
         for region in load(regions):
             entry = Region(**region)
             entry.save()
