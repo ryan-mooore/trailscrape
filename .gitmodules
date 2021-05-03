@@ -1,0 +1,3 @@
+[submodule "trailscrape/backend"]
+	path = trailscrape/backend
+	url = https://github.com/ryan-mooore/trailscrape-backend
