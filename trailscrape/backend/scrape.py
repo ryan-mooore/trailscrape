@@ -45,6 +45,8 @@ def create_status(region, region_status, driver) -> Dict:
     tf_trails = trailforks.scrape(region.trailforksRegionID)
     tf_trail_names = [trail["name"] for trail in tf_trails]
 
+    region_status.parkIsOpen = True
+
     if region.includes["trails"]["name"] or region.includes["trails"]["grade"] or region.includes["trails"]["status"]:
         region_status.trails = scraper_module.get_trails(soup)
 
