@@ -16,6 +16,7 @@ pymongo = "*"
 dnspython = "*"
 webdriver-manager = "*"
 boto = "*"
+mongoengine = "*"
 
 [requires]
 python_version = "3.9"
