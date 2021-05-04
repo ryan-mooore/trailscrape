@@ -25,7 +25,7 @@ const Routes = () => {
 
     return (
         <div className="relative min-h-screen">
-            <div className="pb-10">
+            <div className="sm:pb-10">
             <TransitionGroup>
                 <CSSTransition
                     classNames="fade"

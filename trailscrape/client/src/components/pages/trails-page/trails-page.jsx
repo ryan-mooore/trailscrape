@@ -7,7 +7,7 @@ import NoMatchPage from "../no-match-page/no-match-page";
 import TrailCard from "./trail-card";
 
 const TrailList = (props) => {
-  const [trails, setTrails] = useState(<Message text="Loading..." invisible />);
+  const [trails, setTrails] = useState(<Message text="Loading..." />);
 
   useEffect(() => {
     setTrails(
