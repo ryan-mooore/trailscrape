@@ -1,5 +1,4 @@
 # lockfiles
-Pipfile.lock
 package-lock.json
 
 # dependencies
@@ -7,21 +6,13 @@ node_modules
 /.pnp
 .pnp.js
 
-# testing
-/coverage
-
 # production
 build
-
-# development
-dev
 
 # secrets
 .env
 
 # binaries
-__pycache__
-*.pyc
 assets/chromedriver
 
 # misc
