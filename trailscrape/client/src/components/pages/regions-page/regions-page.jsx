@@ -13,7 +13,7 @@ const RegionList = (props) => {
     if (props.regions !== undefined) {
       return setRegions(
         <List
-          elements={props.regions.regions.sort((a, b) => a.name < b.name).map((region) => (
+          elements={props.regions.regions.sort((a, b) => a.region.name.localeCompare(b.region.name)).map((region) => (
             <RegionCard
               key={region.region.ID}
               status={region.status}

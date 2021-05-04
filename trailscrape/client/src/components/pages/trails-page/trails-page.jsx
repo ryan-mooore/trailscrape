@@ -14,7 +14,7 @@ const TrailList = (props) => {
       <List
         disclaimer={props.disclaimer}
         elements={props.status.trails
-          .sort((a, b) => a.grade < b.grade)
+          .sort((a, b) => a.grade - b.grade || a.name.localeCompare(b.name))
           .filter((trail) => trail.grade)
           .map((trail) => (
             <TrailCard key={trail.id} trail={trail} />
