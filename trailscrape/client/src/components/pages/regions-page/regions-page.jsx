@@ -24,7 +24,7 @@ const RegionList = (props) => {
         />
       );
     } else {
-      fetch("/api")
+      fetch(`${process.env.NODE_ENV === 'development' ? "http://localhost:9000/" : "/"}api`)
         .then((res) => res.json())
         .then(
           (regions) => {

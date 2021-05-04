@@ -13,7 +13,8 @@ const TrailList = (props) => {
     setTrails(
       <List
         disclaimer={props.disclaimer}
-        elements={props.status.trails.sort((a, b) => a.grade < b.grade)
+        elements={props.status.trails
+          .sort((a, b) => a.grade < b.grade)
           .filter((trail) => trail.grade)
           .map((trail) => (
             <TrailCard key={trail.id} trail={trail} />
@@ -37,10 +38,15 @@ const TrailsPage = (props) => {
   const params = useParams();
 
   useEffect(() => {
-
     if (httpStatusCode === undefined) {
       if (props.location.state === undefined) {
-        fetch(`/api/${params.region}`)
+        fetch(
+          `${
+            process.env.NODE_ENV === "development"
+              ? "http://localhost:9000/"
+              : "/"
+          }api/${params.region}`
+        )
           .then((res) => {
             setHttpStatusCode(res.status);
             return res.json();
