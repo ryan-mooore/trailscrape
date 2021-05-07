@@ -38,7 +38,6 @@ const Routes = () => {
   const [regions, setRegions] = useState();
   const [apiDown, setApiDown] = useState(null);
 
-<<<<<<< HEAD
   const router = (
     <div className="relative min-h-screen">
       <div className="sm:pb-10">
@@ -72,7 +71,7 @@ const Routes = () => {
       apiEndpoint = "http://localhost:9000/api";
     }
 
-    const callApi = (apiEndpoint) => {
+    const callApi = () => {
       fetch(apiEndpoint)
         .then(res => res.json())
         .then(json => {
@@ -83,7 +82,7 @@ const Routes = () => {
           setApiDown(true);
           throw error;
         });
-      setTimeout(callApi, 3000)
+      setTimeout(callApi, 600000)
     }; 
 
     callApi();
@@ -103,26 +102,3 @@ const Routes = () => {
   }
 };
 export default App;
-=======
-    return (
-        <div className="relative min-h-screen">
-            <div className="sm:pb-10">
-            <TransitionGroup>
-                <CSSTransition
-                    classNames="fade"
-                    timeout={500}>
-                    <Switch  >
-                        <Route exact path='/' component={RegionsPage} />
-                        <Route path='/:region' component={TrailsPage} />
-                        <Route path='*' component={NoMatchPage} />
-                    </Switch>
-                </CSSTransition>
-
-            </TransitionGroup>
-            </div>
-            <Footer />
-        </div>
-    )
-}
-export default App;
->>>>>>> f4bd79fe2a0b19324079f3217883af5e12558116

@@ -12,11 +12,7 @@ const RegionCard = (props) => {
     return (
       <Card
         left={
-<<<<<<< HEAD
           <h1 className="text-lg text-gray-400 pt-2 xs:pb-4 sm:p-0">
-=======
-          <h1 className="text-lg text-gray-400 pt-2 pb-2 sm:p-0 ">
->>>>>>> f4bd79fe2a0b19324079f3217883af5e12558116
             {`Sorry, status for ${props.region.name} not currently available.`}
           </h1>
         }
@@ -28,11 +24,7 @@ const RegionCard = (props) => {
       <Card
         link={"/" + props.region.ID}
         left={
-<<<<<<< HEAD
           <h1 className="text-lg text-gray-400 pt-2 xs:pb-4 sm:p-0">
-=======
-          <h1 className="text-lg text-gray-400 pt-2 pb-2 sm:p-0">
->>>>>>> f4bd79fe2a0b19324079f3217883af5e12558116
             {props.region.name}
           </h1>
         }
