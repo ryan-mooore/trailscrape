@@ -30,7 +30,7 @@ const TrailsPage = (props) => {
         icon="map"
       />
       <List
-        disclaimer={<Disclaimer region={region?.region} />}
+        disclaimer={<Disclaimer region={region?.region} status={region?.status} />}
         elements={region?.status?.trails
           .filter((trail) => trail.grade)
           .sort((a, b) => a.grade - b.grade || a.name.localeCompare(b.name))

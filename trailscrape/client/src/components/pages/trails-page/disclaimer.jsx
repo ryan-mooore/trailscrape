@@ -1,3 +1,5 @@
+import ReactTimeAgo from 'react-time-ago';
+
 const Disclaimer = (props) => {
   const arrRepr = (arr) => {
     switch (arr.length) {
@@ -11,7 +13,7 @@ const Disclaimer = (props) => {
         return "";
     }
   };
-  
+
   const unreliableSources = Object.entries(props.region.includes.trails).filter(
     ([info, val]) => !val
   );
@@ -23,7 +25,8 @@ const Disclaimer = (props) => {
   return (
     <div>
       <div>
-        {"Data sourced from "}
+        {"Last updated "}
+        <ReactTimeAgo date={props.status.scrapeTime} locale="en-NZ" />{" from "}
         <a className="underline" href={props.region.url}>
           {props.region.url !== undefined
             ? props.region.url.replace(
