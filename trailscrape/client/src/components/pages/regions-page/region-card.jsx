@@ -22,14 +22,7 @@ const RegionCard = (props) => {
   } else {
     return (
       <Card
-        link={{
-          pathname: "/" + props.region.ID,
-          state: {
-            region: props.region,
-            status: props.status,
-            regions: props.regions,
-          },
-        }}
+        link={"/" + props.region.ID}
         left={
           <h1 className="text-lg text-gray-400 pt-2 pb-4 sm:p-0">
             {props.region.name}
