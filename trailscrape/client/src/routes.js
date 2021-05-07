@@ -40,7 +40,7 @@ const Routes = () => {
 
   const router = (
     <div className="relative min-h-screen">
-      <div className="pb-10">
+      <div className="sm:pb-10">
         <TransitionGroup>
           <CSSTransition classNames="fade" timeout={500}>
             <Switch>
@@ -82,11 +82,14 @@ const Routes = () => {
           setApiDown(true);
           throw error;
         });
+      setTimeout(callApi, 3000)
     }; 
 
-    callApi(apiEndpoint);
+    callApi();
+
   }, []);
 
+  console.log(regions)
   switch (apiDown) {
     case true:
       return <Message text="Sorry, the API is currently down." />;
