@@ -38,6 +38,7 @@ const Routes = () => {
   const [regions, setRegions] = useState();
   const [apiDown, setApiDown] = useState(null);
 
+<<<<<<< HEAD
   const router = (
     <div className="relative min-h-screen">
       <div className="sm:pb-10">
@@ -102,3 +103,26 @@ const Routes = () => {
   }
 };
 export default App;
+=======
+    return (
+        <div className="relative min-h-screen">
+            <div className="sm:pb-10">
+            <TransitionGroup>
+                <CSSTransition
+                    classNames="fade"
+                    timeout={500}>
+                    <Switch  >
+                        <Route exact path='/' component={RegionsPage} />
+                        <Route path='/:region' component={TrailsPage} />
+                        <Route path='*' component={NoMatchPage} />
+                    </Switch>
+                </CSSTransition>
+
+            </TransitionGroup>
+            </div>
+            <Footer />
+        </div>
+    )
+}
+export default App;
+>>>>>>> f4bd79fe2a0b19324079f3217883af5e12558116

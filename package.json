@@ -4,8 +4,11 @@
     "api:build": "cd trailscrape/api && npm install && npm start",
     "client": "cd trailscrape/client && npm start",
     "client:build": "cd trailscrape/client && npm install && npm run build",
-    "start": "npm run api & npm run client",
-    "build": "npm run api:build & npm run client:build"
+
+    "heroku-build": "npm run api:build",
+    "heroku-postbuild": "npm run client:build",
+
+    "start": "npm run api & npm run client"
   },
   "engines": {
     "node": "15.10"

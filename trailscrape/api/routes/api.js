@@ -7,7 +7,7 @@ var MongoClient = require('mongodb').MongoClient;
 var uri = process.env.MONGODB_URI || "mongodb://localhost:27017/trailscrape";
 
 router.get('/', function (req, response, next) {
-    MongoClient.connect(uri, (err, client) => {
+    MongoClient.connect(uri, { useUnifiedTopology: true }, (err, client) => {
         if (err) {
             console.log(err);
             throw err;
@@ -49,7 +49,7 @@ router.get('/', function (req, response, next) {
 });
 
 router.get('/:regionID', function (req, res, next) {
-    MongoClient.connect(uri, (err, client) => {
+    MongoClient.connect(uri, { useUnifiedTopology: true }, (err, client) => {
         if (err) {
             console.log(err);
             throw err;

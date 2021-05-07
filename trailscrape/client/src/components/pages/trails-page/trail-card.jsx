@@ -6,7 +6,7 @@ const TrailCard = (props) => {
   return (
     <Card
       left={
-        <div className="flex flex-row items-center pt-2 pb-4 sm:p-0">
+        <div className="flex flex-row items-center pt-2 pb-2 sm:p-0">
           <GradeLogo grade={props.trail.grade} size="20" />
           <h1 className="pl-4 text-lg text-gray-400">{props.trail.name}</h1>
         </div>
