@@ -12,7 +12,7 @@ const RegionCard = (props) => {
     return (
       <Card
         left={
-          <h1 className="text-lg text-gray-400 pt-2 pb-4 sm:p-0 ">
+          <h1 className="text-lg text-gray-400 pt-2 pb-2 sm:p-0 ">
             {`Sorry, status for ${props.region.name} not currently available.`}
           </h1>
         }
@@ -31,7 +31,7 @@ const RegionCard = (props) => {
           },
         }}
         left={
-          <h1 className="text-lg text-gray-400 pt-2 pb-4 sm:p-0">
+          <h1 className="text-lg text-gray-400 pt-2 pb-2 sm:p-0">
             {props.region.name}
           </h1>
         }

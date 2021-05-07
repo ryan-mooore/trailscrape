@@ -2,11 +2,11 @@ import StatusBadge from "./status-badge";
 
 const StatusInfo = (props) => {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col items-end xs:flex-row">
       {Object.entries(props.status).map(([k, v]) => (
-        <div key={k} className="pl-6 flex flex-row items-center text-gray-400">
-          <div className="invisible xs:visible pr-3">{k}</div>
-          <div className={k === "lift" ? "invisible xs:visible" : undefined}>
+        <div key={k} className="pl-6 flex pt-3 flex-row items-center text-gray-400">
+          <div className="pr-3">{k}</div>
+          <div>
             <StatusBadge open={v} />
           </div>
         </div>
