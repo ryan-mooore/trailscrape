@@ -89,7 +89,6 @@ const Routes = () => {
 
   }, []);
 
-  console.log(regions)
   switch (apiDown) {
     case true:
       return <Message text="Sorry, the API is currently down." />;
