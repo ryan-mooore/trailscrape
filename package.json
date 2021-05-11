@@ -10,8 +10,5 @@
   },
   "engines": {
     "node": "15.10"
-  },
-  "dependencies": {
-    "react-time-ago": "^6.2.2"
   }
 }

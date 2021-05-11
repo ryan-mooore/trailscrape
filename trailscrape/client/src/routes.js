@@ -1,16 +1,19 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Analytics from "react-router-ga";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import GHMark from "./assets/gh-mark.svg";
 import NoMatchPage from "./components/pages/no-match-page/no-match-page";
 import RegionsPage from "./components/pages/regions-page/regions-page";
 import TrailsPage from "./components/pages/trails-page/trails-page";
 import Message from "./components/shared/message";
-import GHMark from "./assets/gh-mark.svg";
-import { useEffect, useState } from "react";
 import "./index.css";
 
 const App = () => (
   <Router>
-    <Routes />
+    <Analytics id={process.env.GA_ID}>
+      <Routes />
+    </Analytics>
   </Router>
 );
 
@@ -84,7 +87,7 @@ const Routes = () => {
           throw error;
         });
       setTimeout(callApi, 600000)
-    }; 
+    };
 
     callApi();
 
