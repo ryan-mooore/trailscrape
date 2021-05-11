@@ -24,7 +24,7 @@ const RegionsPage = (props) => {
           </div>
         }
         elements={props.regions
-          .sort()
+          .sort((a, b) => a.region.name.localeCompare(b.region.name))
           .filter((region) => !region.status.scrapeError)
           .map((region) => (
             <RegionCard

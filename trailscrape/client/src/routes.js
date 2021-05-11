@@ -11,7 +11,7 @@ import "./index.css";
 
 const App = () => (
   <Router>
-    <Analytics id="UA-159417101-1" {...(process.env.NODE_ENV === "development" ?  {debug:true} : undefined)}>
+    <Analytics id="UA-159417101-1" {...(process.env.NODE_ENV === "development" ? { debug: true } : undefined)}>
       <Routes />
     </Analytics>
   </Router>
@@ -43,7 +43,7 @@ const Routes = () => {
   const [apiDown, setApiDown] = useState(null);
 
   const router = (
-    <div className="relative min-h-screen">
+    <div className="text-blue-50 relative min-h-screen">
       <div className="sm:pb-10">
         <TransitionGroup>
           <CSSTransition classNames="fade" timeout={500}>
