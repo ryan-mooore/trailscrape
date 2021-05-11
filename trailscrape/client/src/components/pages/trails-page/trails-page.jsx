@@ -16,10 +16,10 @@ const TrailsPage = (props) => {
     setRegion(
       props.regions.filter((region) => region.region.ID === params.region)[0]
     );
-    document.title = `${region.region.name} (${
-      region.status.parkIsOpen ? "OPEN" : "CLOSED"
+    document.title = `${region?.region.name} (${
+      region?.status.parkIsOpen ? "OPEN" : "CLOSED"
     }) | NZ Trail Status`;
-  }, [props.regions, params.region, region.region.name, region.status.parkIsOpen]);
+  }, [props.regions, params.region, region]);
 
   const TrailList = (
     <div>
