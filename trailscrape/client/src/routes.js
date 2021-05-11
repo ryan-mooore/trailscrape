@@ -11,7 +11,7 @@ import "./index.css";
 
 const App = () => (
   <Router>
-    <Analytics id={process.env.GA_ID}>
+    <Analytics id="UA-159417101-1" {...(process.env.NODE_ENV === "development" ?  {debug:true} : undefined)}>
       <Routes />
     </Analytics>
   </Router>
