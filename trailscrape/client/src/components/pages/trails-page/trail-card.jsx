@@ -34,7 +34,7 @@ const TrailCard = (props) => {
             <div 
             onClick={() => setPopoverClicked(false)}
             class={`bg-gray-400 opacity-50 fixed left-0 top-0 w-screen h-screen ${popoverClicked ? undefined : "hidden"}`}></div>
-            <Popover active={popoverClicked} id={props.trail.trailforksID}/>
+            <Popover active={popoverClicked} id={props.trail.trailforksID} onChange={(value) => setPopoverClicked(value)}/>
           </div>
         )
       }
