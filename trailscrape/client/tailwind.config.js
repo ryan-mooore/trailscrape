@@ -6,6 +6,7 @@ module.exports = {
   variants: {
     extend: {
       padding: ['first', 'last'],
+      display: ['group-hover']
     }
   },
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],

@@ -6,6 +6,7 @@ import TrailsPage from "./components/pages/trails-page/trails-page";
 import Message from "./components/shared/message";
 import GHMark from "./assets/gh-mark.svg";
 import { useEffect, useState } from "react";
+import "./index.css";
 
 const App = () => (
   <Router>

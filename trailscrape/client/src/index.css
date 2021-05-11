@@ -10,3 +10,25 @@
     font-family: 'Material Icons Round';
     font-display: block;
 }
+
+.fade-enter {
+    position: absolute;
+    opacity: 0;
+}
+
+.fade-enter-active {
+    position: absolute;
+    opacity: 1;
+    transition: opacity 500ms ease-in-out;
+}
+
+.fade-exit {
+    position: absolute;
+    opacity: 1;
+}
+
+.fade-exit-active {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 500ms ease-in-out;
+}

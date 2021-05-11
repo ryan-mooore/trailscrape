@@ -35,7 +35,7 @@ const TrailsPage = (props) => {
           .filter((trail) => trail.grade)
           .sort((a, b) => a.grade - b.grade || a.name.localeCompare(b.name))
           .map((trail) => (
-            <TrailCard key={trail.id} trail={trail} />
+            <TrailCard key={trail.id} trail={trail} isReliable={region.region.includes.trails.status}/>
           ))}
       />
     </div>

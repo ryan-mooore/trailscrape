@@ -4,13 +4,14 @@
     "api:build": "cd trailscrape/api && npm install && npm start",
     "client": "cd trailscrape/client && npm start",
     "client:build": "cd trailscrape/client && npm install && npm run build",
-
     "heroku-build": "npm run api:build",
     "heroku-postbuild": "npm run client:build",
-
     "start": "npm run api & npm run client"
   },
   "engines": {
     "node": "15.10"
+  },
+  "dependencies": {
+    "react-time-ago": "^6.2.2"
   }
 }
