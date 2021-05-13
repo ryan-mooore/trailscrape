@@ -18,7 +18,7 @@ Trailscrape was created to compile together MTB trail status info from all the m
 
 ### Where
 
-The live website is at [trailstatus.nz.](http://trailstatus.nz), running on a heroku webapp with the scraper running on a cron-like scheduler every 10 min.
+The live website is at [trailstatus.nz](http://trailstatus.nz), running on a heroku webapp with the scraper running on a cron-like scheduler every 10 min.
 
 ### Technologies
 
