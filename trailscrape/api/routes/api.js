@@ -1,19 +1,13 @@
 var express = require('express');
 
-var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-
+var router = express.Router();
 
 var uri = process.env.MONGODB_URI || "mongodb://localhost:27017/trailscrape";
+var db = MongoClient.connect(uri, { useUnifiedTopology: true }, (err, client) => {
+    db = client.db('trailscrape');
 
-router.get('/', function (req, response, next) {
-    MongoClient.connect(uri, { useUnifiedTopology: true }, (err, client) => {
-        if (err) {
-            console.log(err);
-            throw err;
-        }
-        var db = client.db('trailscrape');
-
+    router.get('/', function (req, response, next) {
         let json = { regions: [] };
         let statuses;
         let regions;
@@ -46,26 +40,27 @@ router.get('/', function (req, response, next) {
             });
         });
     });
+
+    router.get('/:regionID', function (req, res, next) {
+        MongoClient.open(uri, { useUnifiedTopology: true }, (err, client) => {
+            if (err) {
+                console.log(err);
+                throw err;
+            }
+            var db = client.db('trailscrape');
+            db.collection("region_status").findOne({ ID: req.params.regionID }, (err, status) => {
+                db.collection("region").findOne({ ID: req.params.regionID }, (err, region) => {
+                    if (status === null || region === null) {
+                        res.statusCode = 404;
+                        return res.send("The specified region does not exist.")
+                    }
+                    return res.send({ region: region, status: status })
+                })
+            })
+        }
+        )
+    }
+    );
 });
 
-router.get('/:regionID', function (req, res, next) {
-    MongoClient.connect(uri, { useUnifiedTopology: true }, (err, client) => {
-        if (err) {
-            console.log(err);
-            throw err;
-        }
-        var db = client.db('trailscrape');
-        db.collection("region_status").findOne({ ID: req.params.regionID }, (err, status) => {
-            db.collection("region").findOne({ ID: req.params.regionID }, (err, region) => {
-                if (status === null || region === null) {
-                    res.statusCode = 404;
-                    return res.send("The specified region does not exist.")
-                }
-                return res.send({ region: region, status: status })
-            })
-        })
-    }
-    )
-}
-);
 module.exports = router;
