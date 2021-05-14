@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('api:server');
 var http = require('http');
+var enforce = require('express-sslify');
+
+app.use(enforce.HTTPS());
 
 /**
  * Get port from environment and store in Express.
