@@ -7,6 +7,7 @@ var trailsRouter = require('./routes/api');
 
 var app = express();
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -20,18 +21,19 @@ app.use('/api', trailsRouter);
 
 var env = process.env.NODE_ENV || 'development';
 
-app.use((req, res, next) => {
-  if (req.header('x-forwarded-proto') !== 'https')
-    res.redirect(`https://${req.header('host')}${req.url}`)
-  else
-    next()
-})
 
 // Serve static files from the React app
 if (env === 'production') {
+  app.get('*', function (req, res, next) {
+    if (req.header('x-forwarded-proto') !== 'https') {
+      res.redirect(`https://${req.header('host')}${req.url}`)
+    }
+    else {
+      next()
+    }
+  });
   app.use(express.static(path.join(__dirname, '../client/build')));
-
-  app.get('*', function (req, res) {
+  app.get('*', function (req, res, next) {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
   });
 }
