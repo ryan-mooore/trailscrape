@@ -20,6 +20,13 @@ app.use('/api', trailsRouter);
 
 var env = process.env.NODE_ENV || 'development';
 
+app.use((req, res, next) => {
+  if (req.header('x-forwarded-proto') !== 'https')
+    res.redirect(`https://${req.header('host')}${req.url}`)
+  else
+    next()
+})
+
 // Serve static files from the React app
 if (env === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
