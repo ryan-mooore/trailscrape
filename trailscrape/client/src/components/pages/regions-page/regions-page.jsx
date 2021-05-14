@@ -12,7 +12,8 @@ const RegionsPage = (props) => {
       <Title title="Regions" />
           </div>
       <List
-        disclaimer={
+        disclaimer={<>
+          <div>Click any region to see trail status</div>
           <div>
             Last updated{" "}
             <ReactTimeAgo
@@ -24,6 +25,7 @@ const RegionsPage = (props) => {
               locale="en-NZ"
             />
           </div>
+          </>
         }
         elements={props.regions
           .sort((a, b) => a.region.name.localeCompare(b.region.name))
