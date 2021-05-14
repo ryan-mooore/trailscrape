@@ -10,24 +10,18 @@ import TrailCard from "./trail-card";
 import StatusBadge from "../../shared/status-badge";
 
 const TrailsPage = (props) => {
-  const [region, setRegion] = useState({
-    region: { includes: { trails: true } },
-    status: {
-      scrapeTime: Date.now(),
-      parkIsOpen: null,
-      liftIsOpen: null,
-      trails: [],
-    },
-  });
+  const [region, setRegion] = useState(null);
   const params = useParams();
 
   useEffect(() => {
     setRegion(
       props.regions.filter((region) => region.region.ID === params.region)[0]
     );
+    if (region) {
     document.title = `${region.region.name} (${
       region.status.parkIsOpen ? "OPEN" : "CLOSED"
     }) | NZ Trail Status`;
+    }
   }, [props.regions, params.region, region]);
 
   switch (region) {
@@ -42,7 +36,7 @@ const TrailsPage = (props) => {
           <div className="mx-auto max-w-md sm:max-w-screen-md flex flex-col sm:flex-row justify-between items-center">
             <Title
               title="Trails"
-              subtitle={`at ${region.region.name}`}
+              subtitle={`at ${region.region.name || "Loading..."}`}
               icon=""
             />
             <div className="flex flex-col self-stretch mx-5 sm:items-end sm:pt-10">
