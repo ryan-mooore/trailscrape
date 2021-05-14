@@ -7,8 +7,10 @@ import ReactTimeAgo from "react-time-ago";
 const RegionsPage = (props) => {
   useEffect(() => (document.title = "Regions | NZ Trail Status"));
   return (
-    <div >
-      <Title title="Regions" icon="landscape" offset="-2" />
+    <div>
+          <div className="mx-auto max-w-md sm:max-w-screen-md flex flex-col sm:flex-row justify-between items-start">
+      <Title title="Regions" />
+          </div>
       <List
         disclaimer={
           <div>
