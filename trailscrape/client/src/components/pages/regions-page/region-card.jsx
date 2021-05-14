@@ -4,7 +4,7 @@ import Card from "../../shared/card";
 const RegionCard = (props) => {
   let stat = {};
   if (props.region.includes.park.liftStatus) {
-    stat.lift = props.status.liftIsOpen;
+    stat.uplift = props.status.liftIsOpen;
   }
   stat.park = props.status.parkIsOpen;
 

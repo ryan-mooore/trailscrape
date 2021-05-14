@@ -1,6 +1,6 @@
-const StatusBadge = (props) => {
+const StatusBadge = ({ open, left }) => {
   let state = {};
-  switch (props.open) {
+  switch (open) {
     case true:
       state = {
         status: "open",
@@ -19,13 +19,20 @@ const StatusBadge = (props) => {
         color: "bg-gray-500",
       };
   }
-  return (
-    <div
-      className={`flex flex-row w-24 justify-center items-center text-white text-sm font-bold rounded-full h-10 uppercase p-2 pl-4 pr-4 ${state.color}`}
-    >
-      {state.status}
-    </div>
-  );
+
+  const badgeUI = `flex flex-row items-center text-white text-sm font-bold rounded-full uppercase ${state.color}`;
+
+  if (left) {
+    return (
+      <div className={"h-14 pr-5 mb-3 justify-between " + badgeUI}>
+        <div className="pl-5 pr-10">{left}</div>
+        <div>{state.status}</div>
+        
+      </div>
+    );
+  }
+  
+  return <div className={"h-10 w-24 justify-center " + badgeUI}>{state.status}</div>;
 };
 
 export default StatusBadge;
