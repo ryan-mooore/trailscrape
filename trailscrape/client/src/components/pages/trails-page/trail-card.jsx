@@ -24,19 +24,22 @@ const TrailCard = (props) => {
       }
       icon={
         <div class="relative h-6 flex flex-row">
-          <a
-            href={`https://trailforks.com/trails/${props.trail.trailforksName}`}
-            target="_blank"
-            rel="noreferrer"
-            class="z-10 material-icons-round text-gray-500"
-            onClick
-          >
-            open_in_new
-          </a>
+          {props.trail.trailforksName ? (
+            <a
+              href={`https://trailforks.com/trails/${props.trail.trailforksName}`}
+              target="_blank"
+              rel="noreferrer"
+              class="z-10 material-icons-round text-gray-500"
+              title="Open trail on Trailforks"
+            >
+              open_in_new
+            </a>
+          ) : undefined}
           {props.isReliable ? undefined : (
             <>
               <button
                 class="z-10 material-icons-round text-gray-500 ml-6"
+                title="Edit trail status"
                 onClick={() => setPopoverClicked(!popoverClicked)}
               >
                 edit

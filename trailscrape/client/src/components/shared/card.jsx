@@ -22,6 +22,7 @@ const Card = (props) => {
       <Link
         to={props.link}
         className={`hover:no-underline hover:shadow-md ${style}`}
+        title={props.tooltip}
       >
         {layout}
       </Link>

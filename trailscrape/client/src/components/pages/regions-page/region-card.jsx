@@ -28,6 +28,7 @@ const RegionCard = (props) => {
             {props.region.name}
           </h1>
         }
+        tooltip={`Trails at ${props.region.name}`}
         right={<StatusInfo status={stat} />}
       />
     );

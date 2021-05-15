@@ -24,7 +24,7 @@ const StatusBadge = ({ open, left }) => {
 
   if (left) {
     return (
-      <div className={"h-14 pr-5 mb-3 justify-between " + badgeUI}>
+      <div className={"h-14 pr-5 mb-3 justify-between " + badgeUI} title={state.status.toUpperCase()}>
         <div className="pl-5 pr-10">{left}</div>
         <div>{state.status}</div>
         
@@ -32,7 +32,7 @@ const StatusBadge = ({ open, left }) => {
     );
   }
   
-  return <div className={"h-10 w-24 justify-center " + badgeUI}>{state.status}</div>;
+  return <div className={"h-10 w-24 justify-center " + badgeUI} title={state.status.toUpperCase()}>{state.status}</div>;
 };
 
 export default StatusBadge;
