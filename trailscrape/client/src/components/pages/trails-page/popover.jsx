@@ -1,5 +1,4 @@
 const Popover = (props) => {
-
   return (
     <div
       class={`z-10 fixed sm:absolute w-3/4 sm:w-auto rounded-md left-1/2 top-1/2 sm:top-auto transform -translate-x-1/2 -translate-y-1/2 sm:translate-y-0 ${
@@ -21,6 +20,8 @@ const Popover = (props) => {
           <a
             class="underline"
             href={`https://trailforks.com/contribute/report/?trailid=${props.id}`}
+            target="_blank"
+            rel="noreferrer"
           >
             add a new report
           </a>
