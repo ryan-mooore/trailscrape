@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Analytics from "react-router-ga";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import GHMark from "./assets/gh-mark.svg";
+import TwitterMark from "./assets/twitter-mark.svg";
 import NoMatchPage from "./components/pages/no-match-page/no-match-page";
 import RegionsPage from "./components/pages/regions-page/regions-page";
 import TrailsPage from "./components/pages/trails-page/trails-page";
@@ -18,24 +19,34 @@ const App = () => (
 );
 
 const Footer = () => (
+<>
   <footer className="absolute bottom-0 h-10 w-full bg-gray-500 hidden sm:flex flex-row justify-between items-center pl-5 pr-5 text-gray-400 text-sm">
     <div>&copy; Copyright Ryan Moore, {new Date().getFullYear()}</div>
-    <div>
-      <a href="https://github.com/ryan-mooore/trailscrape" title="Link to source code (Github)">
-        <img
-          src={GHMark}
-          alt="link to GitHub repository"
-          height="25"
-          width="25"
-        ></img>
-      </a>
-    </div>
     <div>
       <a href="https://forms.gle/dngABSxNa2et5fpD6" className="underline" target="_blank">
         Suggest a park to be added
       </a>
     </div>
   </footer>
+  <div className="absolute bottom-0 h-10 w-full flex flex-row justify-center items-center">
+    <a href="https://github.com/ryan-mooore/trailscrape" title="Link to source code (Github)" target="_blank">
+      <img
+        src={GHMark}
+        alt="link to GitHub repository"
+        height="25"
+        width="25"
+      ></img>
+    </a>
+    <a href="https://twitter.com/ryan_mooore" title="Link to my Twitter" className="ml-4" target="_blank">
+      <img
+        src={TwitterMark}
+        alt="link to my Twitter"
+        height="28"
+        width="28"
+      ></img>
+    </a>
+  </div>
+</>
 );
 
 const Routes = () => {
