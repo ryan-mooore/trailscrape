@@ -20,9 +20,9 @@ const App = () => (
 
 const Footer = () => (
 <>
-  <footer className="absolute bottom-0 h-10 w-full bg-gray-500 hidden sm:flex flex-row justify-between items-center pl-5 pr-5 text-gray-400 text-sm">
-    <div>&copy; Copyright Ryan Moore, {new Date().getFullYear()}</div>
-    <div>
+  <footer className="absolute bottom-0 h-10 w-full bg-gray-500 flex flex-row justify-between items-center pl-5 pr-5 text-gray-400 text-sm">
+    <div className="hidden sm:block">&copy; Copyright Ryan Moore, {new Date().getFullYear()}</div>
+    <div className="hidden sm:block">
       <a href="https://forms.gle/dngABSxNa2et5fpD6" className="underline" target="_blank">
         Suggest a park to be added
       </a>
@@ -37,7 +37,8 @@ const Footer = () => (
         width="25"
       ></img>
     </a>
-    <a href="https://twitter.com/ryan_mooore" title="Link to my Twitter" className="ml-4" target="_blank">
+    <a href="buymeacoffee.com/ryanmooore" className="underline px-4 text-lg font-bold text-gray-400">Donate!</a>
+    <a href="https://twitter.com/ryan_mooore" title="Link to my Twitter" target="_blank">
       <img
         src={TwitterMark}
         alt="link to my Twitter"
@@ -55,7 +56,7 @@ const Routes = () => {
 
   const router = (
     <div className="text-blue-50 relative min-h-screen">
-      <div className="sm:pb-10">
+      <div className="pb-10">
         <TransitionGroup>
           <CSSTransition classNames="fade" timeout={500}>
             <Switch>
