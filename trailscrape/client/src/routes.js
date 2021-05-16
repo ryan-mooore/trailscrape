@@ -37,7 +37,7 @@ const Footer = () => (
         width="25"
       ></img>
     </a>
-    <a href="buymeacoffee.com/ryanmooore" className="underline px-4 text-lg font-bold text-gray-400">Donate!</a>
+    <a href="https://buymeacoffee.com/ryanmooore" className="underline px-4 text-lg font-bold text-gray-400">Donate!</a>
     <a href="https://twitter.com/ryan_mooore" title="Link to my Twitter" target="_blank">
       <img
         src={TwitterMark}
