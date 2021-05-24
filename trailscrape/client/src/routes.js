@@ -20,11 +20,11 @@ const App = () => (
 
 const Footer = () => (
 <>
-  <footer className="absolute bottom-0 h-10 w-full bg-gray-500 flex flex-row justify-between items-center pl-5 pr-5 text-gray-400 text-sm">
-    <div className="hidden sm:block">&copy; Copyright Ryan Moore, {new Date().getFullYear()}</div>
-    <div className="hidden sm:block">
-      <a href="https://forms.gle/dngABSxNa2et5fpD6" className="underline" target="_blank">
-        Suggest a park to be added
+  <footer className="absolute bottom-0 h-10 w-full bg-gray-500 hidden sm:flex flex-row justify-between items-center pl-5 pr-5 text-gray-400 text-sm">
+    <div>&copy; Copyright Ryan Moore, {new Date().getFullYear()}</div>
+    <div>
+      <a href="https://facebook.com/ryan.moooore" className="underline" target="_blank">
+        Contact
       </a>
     </div>
   </footer>

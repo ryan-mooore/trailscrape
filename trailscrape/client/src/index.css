@@ -6,11 +6,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons+Round');
 
-@font-face {
-    font-family: 'Material Icons Round';
-    font-display: block;
-}
-
 .fade-enter {
     position: absolute;
     opacity: 0;
@@ -31,4 +26,12 @@
     position: absolute;
     opacity: 0;
     transition: opacity 500ms ease-in-out;
+}
+
+.material-icons-round {
+    overflow: hidden;
+}
+
+.material-icons-round:before {
+    opacity: 0;
 }
