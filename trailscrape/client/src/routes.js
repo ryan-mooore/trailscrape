@@ -19,35 +19,33 @@ const App = () => (
 );
 
 const Footer = () => (
-<>
   <footer className="absolute bottom-0 h-10 w-full bg-gray-500 hidden sm:flex flex-row justify-between items-center pl-5 pr-5 text-gray-400 text-sm">
-    <div>&copy; Copyright Ryan Moore, {new Date().getFullYear()}</div>
-    <div>
-      <a href="https://facebook.com/ryan.moooore" className="underline" target="_blank">
+    <div className="w-56">&copy; Copyright Ryan Moore, {new Date().getFullYear()}</div>
+    <div className="flex flex-row">
+      <a href="https://github.com/ryan-mooore/trailscrape" rel="noreferrer" title="Link to source code (Github)" target="_blank">
+        <img
+          src={GHMark}
+          alt="link to GitHub repository"
+          height="25"
+          width="25"
+        ></img>
+      </a>
+      <a href="https://buymeacoffee.com/ryanmooore" rel="noreferrer" className="underline px-4 text-lg font-bold text-gray-400">Donate!</a>
+      <a href="https://twitter.com/ryan_mooore" rel="noreferrer" title="Link to my Twitter" target="_blank">
+        <img
+          src={TwitterMark}
+          alt="link to my Twitter"
+          height="28"
+          width="28"
+        ></img>
+      </a>
+    </div>
+    <div className="w-56 text-right">
+      <a href="https://facebook.com/ryan.moooore" rel="noreferrer" className="underline" target="_blank">
         Contact
       </a>
     </div>
   </footer>
-  <div className="absolute bottom-0 h-10 w-full flex flex-row justify-center items-center">
-    <a href="https://github.com/ryan-mooore/trailscrape" title="Link to source code (Github)" target="_blank">
-      <img
-        src={GHMark}
-        alt="link to GitHub repository"
-        height="25"
-        width="25"
-      ></img>
-    </a>
-    <a href="https://buymeacoffee.com/ryanmooore" className="underline px-4 text-lg font-bold text-gray-400">Donate!</a>
-    <a href="https://twitter.com/ryan_mooore" title="Link to my Twitter" target="_blank">
-      <img
-        src={TwitterMark}
-        alt="link to my Twitter"
-        height="28"
-        width="28"
-      ></img>
-    </a>
-  </div>
-</>
 );
 
 const Routes = () => {
