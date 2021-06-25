@@ -63,6 +63,7 @@ const TrailsPage = ({ regions }) => {
                         </div>
                       }
                       open={status}
+                      percentage={name === "park" ? region.status.trails.filter((trail) => trail.isOpen).length / region.status.trails.length * 100 : undefined}
                     />
                   )
               )}

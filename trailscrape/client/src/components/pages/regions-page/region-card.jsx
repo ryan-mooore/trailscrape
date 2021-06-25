@@ -29,7 +29,7 @@ const RegionCard = ({ region, status }) => {
           </h1>
         }
         tooltip={`Trails at ${region.name}`}
-        right={<StatusInfo status={stat} />}
+        right={<StatusInfo status={stat} percentage={status.trails.filter((trail) => trail.isOpen).length / status.trails.length} />}
       />
     );
   }
