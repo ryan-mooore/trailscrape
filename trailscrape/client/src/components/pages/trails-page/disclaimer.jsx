@@ -1,62 +1,90 @@
 import ReactTimeAgo from 'react-time-ago';
 
-const Disclaimer = (props) => {
-  const arrRepr = (arr) => {
-    switch (arr.length) {
-      case 1:
-        return `${arr[0]}`;
-      case 2:
-        return `${arr[0]} and ${arr[1]}`;
-      case 3:
-        return `${arr[0]}, ${arr[1]} and ${arr[2]}`;
+const Disclaimer = ({ region, status }) => {
+
+  const unreliableSources = (method) => {
+    switch (method) {
+      case "copyFromTrailforks":
+        return "Park status, trail grade and trail status"
+      case "scrapeStatusAndGetGradeFromTrailforks":
+        return "Trail grade"
+      case "scrapeParkAndGetTrailsFromTrailforks":
+        return "Trail grade and trail status"
       default:
-        return "";
+        return false
     }
-  };
+  }
 
-  const unreliableSources = Object.entries(props.region.includes.trails).filter(
-    ([info, val]) => !val
-  );
+  const source = ({ method, methodInfo }) => {
 
-  const unreliableSourcesStr = arrRepr(
-    unreliableSources.map(([info, val]) => info)
-  );
+    const buildLink = (url, text) => {
+      if (!text) {
+        text = url.replace(
+          /(^\w+:|^)\/\/(w{3}\.)*([^/]*)\/*.*$/,
+          "$3")
+      }
+      if (url) {
+        return (<a className="underline"
+          target="_blank"
+          rel="noreferrer"
+          href={url}>{text}</a>
+        )
+      } else {
+        return <span>{text}</span>
+      }
+    }
+
+    switch (method) {
+      case "copyFromTrailforks":
+        return buildLink("https://trailforks.com", "Trailforks")
+      case "scrapeStatusAndGetGradeFromTrailforks":
+        return buildLink(methodInfo.url, false)
+      case "scrapeParkAndGetTrailsFromTrailforks":
+        return buildLink(methodInfo.url, false)
+      case "scrapeTrails":
+        return buildLink(methodInfo.url, false)
+      case "api":
+        return buildLink(false, "an external API")
+      default:
+        break;
+    }
+  }
+
+  const regionIDSource = (regionID) => {
+    if (typeof regionID == "string") regionID = [regionID]
+    return <>{
+      regionID.map((region) =>
+        <a
+          className="underline"
+          target="_blank"
+          rel="noreferrer"
+          href={`https://www.trailforks.com/region/${region}`}
+        >
+          {region}
+        </a>
+      )
+        .reduce((acc, x) => acc === null ? [x] : [acc, ', ', x], null)
+    }
+    </>
+  }
 
   return (
     <div>
       <div>
-        {"Last updated "}
-        <ReactTimeAgo date={props.status.scrapeTime} locale="en-NZ" />{" from "}
-        <a className="underline" href={props.region.url}>
-          {props.region.url !== undefined
-            ? props.region.url.replace(
-                /(^\w+:|^)\/\/(w{3}\.)*([^/]*)\/*.*$/,
-                "$3"
-              )
-            : "loading..."}
-        </a>
+        Last updated <ReactTimeAgo date={status.scrapeTime} locale="en-NZ" /> from {source(region)}
       </div>
-      {unreliableSources.length > 0 ? (
+      {unreliableSources(region.method) &&
         <>
           <div>
-            {`${
-              unreliableSourcesStr[0].toUpperCase() +
-              unreliableSourcesStr.slice(1)
-            } data sourced from `}
-            <a
-              className="underline"
-              href={`https://www.trailforks.com/region/${props.region.trailforksRegionID}`}
-            >
-              {`${props.region.trailforksRegionID} on Trailforks`}
-            </a>
+            {unreliableSources(region.method)} data sourced from {regionIDSource(region.methodInfo.regionID)} on Trailforks
           </div>
           <div>
             NB: Trailforks data provides 3rd party trail information and is
             subject to inaccuracy
           </div>
         </>
-      ) : undefined}
-    </div>
+      }
+    </div >
   );
 };
 

@@ -9,20 +9,19 @@ import Disclaimer from "./disclaimer";
 import TrailCard from "./trail-card";
 import StatusBadge from "../../shared/status-badge";
 
-const TrailsPage = (props) => {
+const TrailsPage = ({ regions }) => {
   const [region, setRegion] = useState(null);
   const params = useParams();
 
   useEffect(() => {
     setRegion(
-      props.regions.filter((region) => region.region.ID === params.region)[0]
+      regions.filter((region) => region.region.ID === params.region)[0]
     );
     if (region) {
-    document.title = `${region.region.name} (${
-      region.status.parkIsOpen ? "OPEN" : "CLOSED"
-    }) | NZ Trail Status`;
+      document.title = `${region.region.name} (${region.status.parkIsOpen ? "OPEN" : "CLOSED"
+        }) | NZ Trail Status`;
     }
-  }, [props.regions, params.region, region]);
+  }, [regions, params.region, region]);
 
   switch (region) {
     case null:
@@ -84,7 +83,7 @@ const TrailsPage = (props) => {
                 <TrailCard
                   key={trail.id}
                   trail={trail}
-                  isReliable={region.region.includes.trails.status}
+                  canEdit={region.region.method == "scrapeParkAndGetTrailsFromTrailforks" || region.region.method == "copyFromTrailforks"}
                 />
               ))}
           />

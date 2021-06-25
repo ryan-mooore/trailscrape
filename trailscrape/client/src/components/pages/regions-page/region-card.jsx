@@ -1,19 +1,19 @@
 import StatusInfo from "../../shared/status-info";
 import Card from "../../shared/card";
 
-const RegionCard = (props) => {
+const RegionCard = ({ region, status }) => {
   let stat = {};
-  if (props.region.includes.park.liftStatus) {
-    stat.uplift = props.status.liftIsOpen;
+  if (region.hasUplifts) {
+    stat.uplift = status.liftIsOpen;
   }
-  stat.park = props.status.parkIsOpen;
+  stat.park = status.parkIsOpen;
 
-  if (props.status.scrapeError) {
+  if (status.scrapeError) {
     return (
       <Card
         left={
           <h1 className="text-lg text-gray-400 pt-2 xs:pb-4 sm:p-0">
-            {`Sorry, status for ${props.region.name} not currently available.`}
+            {`Sorry, status for ${region.name} not currently available.`}
           </h1>
         }
         right={<StatusInfo status={{ park: null }} />}
@@ -22,13 +22,13 @@ const RegionCard = (props) => {
   } else {
     return (
       <Card
-        link={"/" + props.region.ID}
+        link={"/" + region.ID}
         left={
           <h1 className="text-lg text-gray-400 pt-2 xs:pb-4 sm:p-0">
-            {props.region.name}
+            {region.name}
           </h1>
         }
-        tooltip={`Trails at ${props.region.name}`}
+        tooltip={`Trails at ${region.name}`}
         right={<StatusInfo status={stat} />}
       />
     );

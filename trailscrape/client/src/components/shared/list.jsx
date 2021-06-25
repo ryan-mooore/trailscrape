@@ -1,12 +1,12 @@
-const List = (props) => {
+const List = ({ disclaimer, elements }) => {
   return (
     <div className="flex flex-col max-w-md sm:max-w-screen-md m-auto items-stretch pb-12">
-      {props.disclaimer ? (
+      {disclaimer ? (
         <div className="pl-10 pr-10 text-gray-400 text-xs italic">
-          {props.disclaimer}
+          {disclaimer}
         </div>
       ) : undefined}
-      {props.elements}
+      {elements}
     </div>
   );
 };
