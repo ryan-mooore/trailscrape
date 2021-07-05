@@ -1,9 +1,9 @@
 import StatusInfo from "../../shared/status-info";
 import Card from "../../shared/card";
 
-const RegionCard = ({ region, status }) => {
+const ParkCard = ({ park, status, link }) => {
   let stat = {};
-  if (region.hasUplifts) {
+  if (park.methodInfo.hasUplifts) {
     stat.uplift = status.liftIsOpen;
   }
   stat.park = status.parkIsOpen;
@@ -13,7 +13,7 @@ const RegionCard = ({ region, status }) => {
       <Card
         left={
           <h1 className="text-lg text-gray-400 pt-2 xs:pb-4 sm:p-0">
-            {`Sorry, status for ${region.name} not currently available.`}
+            {`Sorry, status for ${park.name} not currently available.`}
           </h1>
         }
         right={<StatusInfo status={{ park: null }} />}
@@ -22,17 +22,25 @@ const RegionCard = ({ region, status }) => {
   } else {
     return (
       <Card
-        link={"/" + region.ID}
+        link={link}
         left={
           <h1 className="text-lg text-gray-400 pt-2 xs:pb-4 sm:p-0">
-            {region.name}
+            {park.name}
           </h1>
         }
-        tooltip={`Trails at ${region.name}`}
-        right={<StatusInfo status={stat} percentage={status.trails.filter((trail) => trail.isOpen).length / status.trails.length} />}
+        tooltip={`Trails at ${park.name}`}
+        right={
+          <StatusInfo
+            status={stat}
+            percentage={
+              status.trails.filter((trail) => trail.isOpen).length /
+              status.trails.length
+            }
+          />
+        }
       />
     );
   }
 };
 
-export default RegionCard;
+export default ParkCard;

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Analytics from "react-router-ga";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import GHMark from "./assets/gh-mark.svg";
 import TwitterMark from "./assets/twitter-mark.svg";
 import NoMatchPage from "./components/pages/no-match-page/no-match-page";
+import ParksPage from "./components/pages/parks-page/parks-page";
 import RegionsPage from "./components/pages/regions-page/regions-page";
 import TrailsPage from "./components/pages/trails-page/trails-page";
 import Message from "./components/shared/message";
@@ -49,7 +50,7 @@ const Footer = () => (
 );
 
 const Routes = () => {
-  const [regions, setRegions] = useState();
+  const [bike, setBike] = useState();
   const [apiDown, setApiDown] = useState(null);
 
   const router = (
@@ -58,18 +59,28 @@ const Routes = () => {
         <TransitionGroup>
           <CSSTransition classNames="fade" timeout={500}>
             <Switch>
-              <Route
+              <Route 
                 exact
                 path="/"
-                render={() => <RegionsPage {...regions} />}
+              >
+                <Redirect to="/bike" />
+              </Route>
+              <Route
+                path="/:activity/:region/:park/"
+                render={() => <TrailsPage bike={bike} />}
               />
               <Route
-                path="/:region"
-                render={() => <TrailsPage {...regions} />}
+                exact
+                path="/:activity/:region"
+                render={() => <ParksPage bike={bike} />}
+              />
+              <Route 
+                path="/:activity"
+                render={() => <RegionsPage bike={bike} />}
               />
               <Route
                 path="*"
-                render={() => <NoMatchPage {...regions} />}
+                render={() => <NoMatchPage bike={bike} />}
               />
             </Switch>
           </CSSTransition>
@@ -82,14 +93,14 @@ const Routes = () => {
   useEffect(() => {
     let apiEndpoint = "/api";
     if (process.env.NODE_ENV === "development") {
-      apiEndpoint = "http://localhost:9000/api";
+      apiEndpoint = "http://localhost:9000/api/bike";
     }
 
     const callApi = () => {
       fetch(apiEndpoint)
         .then(res => res.json())
         .then(json => {
-          setRegions(json);
+          setBike(json);
           setApiDown(false);
         })
         .catch((error) => {
