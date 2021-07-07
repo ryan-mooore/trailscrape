@@ -2,12 +2,6 @@ import StatusInfo from "../../shared/status-info";
 import Card from "../../shared/card";
 
 const ParkCard = ({ park, status, link }) => {
-  let stat = {};
-  if (park.methodInfo.hasUplifts) {
-    stat.uplift = status.liftIsOpen;
-  }
-  stat.park = status.parkIsOpen;
-
   if (status.scrapeError) {
     return (
       <Card
@@ -31,7 +25,7 @@ const ParkCard = ({ park, status, link }) => {
         tooltip={`Trails at ${park.name}`}
         right={
           <StatusInfo
-            status={stat}
+            status={status}
             percentage={
               status.trails.filter((trail) => trail.isOpen).length /
               status.trails.length
