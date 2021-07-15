@@ -47,7 +47,7 @@ const TrailsPage = ({ bike }) => {
                       <div>{name}</div>
                     </div>
                   }
-                  open={status}
+                  status={status}
                   percentage={
                     name === "park"
                       ? (park.status.trails.filter((trail) => trail.isOpen)
@@ -75,10 +75,10 @@ const TrailsPage = ({ bike }) => {
               <TrailCard
                 key={trail.id}
                 trail={trail}
-                canEdit={
-                  park.park.methodInfo in
-                  ["scrapeParkAndGetTrailsFromTrailforks", "copyFromTrailforks"]
-                }
+                canEdit={[
+                  "scrapeParkAndGetTrailsFromTrailforks",
+                  "copyFromTrailforks",
+                ].includes(park.park.method)}
               />
             ))}
         />

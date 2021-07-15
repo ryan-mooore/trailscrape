@@ -2,6 +2,8 @@ import Card from "../../shared/card";
 import List from "../../shared/list";
 import Page from "../../shared/page";
 import Title from "../../shared/title";
+import Summary from "../../shared/summary";
+import StatusBadge from "../../shared/status-badge";
 
 const RegionsPage = ({ bike }) => {
   return (
@@ -10,13 +12,23 @@ const RegionsPage = ({ bike }) => {
       docTitle="Regions"
       list={
         <List
+          cols={1}
           elements={Object.entries(bike.bike).map(([regionID, region]) => (
             <Card
               left={
-                <h1 className="pl-4 text-lg text-gray-400">{region.name}</h1>
+                <Summary
+                  name={region.name}
+                  open={
+                    Object.values(region.parks).filter(
+                      (park) => park.status.parkIsOpen
+                    ).length
+                  }
+                  total={Object.values(region.parks).length}
+                  objects="regions"
+                ></Summary>
               }
               link={"/bike/" + regionID}
-              right={<div></div>}
+              right={<StatusBadge status="place" />}
             />
           ))}
         />
