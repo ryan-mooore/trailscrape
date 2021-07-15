@@ -105,6 +105,7 @@ const Routes = () => {
         })
         .catch((error) => {
           setApiDown(true);
+          console.log(error)
           throw error;
         });
       setTimeout(callApi, 600000)
