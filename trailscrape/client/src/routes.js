@@ -91,7 +91,7 @@ const Routes = () => {
   );
 
   useEffect(() => {
-    let apiEndpoint = "/api";
+    let apiEndpoint = "/api/bike";
     if (process.env.NODE_ENV === "development") {
       apiEndpoint = "http://localhost:9000/api/bike";
     }
@@ -105,7 +105,6 @@ const Routes = () => {
         })
         .catch((error) => {
           setApiDown(true);
-          console.log(error)
           throw error;
         });
       setTimeout(callApi, 600000)
