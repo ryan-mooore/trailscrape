@@ -13,7 +13,8 @@ const ParksPage = ({ bike }) => {
   return (
     <Page
       docTitle={`${region.name} (${
-        Object.values(region.parks).map((park) => park.status.parkIsOpen).length
+        Object.values(region.parks).map((park) => park.status.status.parkIsOpen)
+          .length
       } OPEN)`}
       title={<Title title="Parks" subtitle={`in ${region.name}`} />}
       list={
@@ -39,8 +40,8 @@ const ParksPage = ({ bike }) => {
             .filter(([parkID, park]) => !park.status.scrapeError)
             .map(([parkID, park]) => (
               <ParkCard
-                key={parkID}
-                status={park.status}
+
+                status={park.status.status}
                 park={park.park}
                 link={`/${params.activity}/${params.region}/${parkID}`}
               />

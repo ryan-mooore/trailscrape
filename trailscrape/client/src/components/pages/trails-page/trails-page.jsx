@@ -65,10 +65,10 @@ const TrailsPage = ({ bike }) => {
         <List
           disclaimer={<Disclaimer park={park.park} status={park.status} />}
           parkStatus={{
-            park: park.status.parkIsOpen,
-            lift: park.status.liftIsOpen,
+            park: park.status.status.parkIsOpen,
+            lift: park.status.status.liftIsOpen,
           }}
-          elements={park.status.trails
+          elements={park.status.status.trails
             .filter((trail) => trail.grade)
             .sort((a, b) => a.grade - b.grade || a.name.localeCompare(b.name))
             .map((trail) => (
@@ -78,6 +78,7 @@ const TrailsPage = ({ bike }) => {
                 canEdit={[
                   "scrapeParkAndGetTrailsFromTrailforks",
                   "copyFromTrailforks",
+                  "scrapeGradeAndGetStatusFromTrailforks",
                 ].includes(park.park.method)}
               />
             ))}

@@ -24,7 +24,7 @@ const Card = ({ left, right, icons, tooltip, link, bg }) => {
           <div className="sm:hidden self-start mr-2 mt-2 pl-4">{icons}</div>
         </div>
         <div className="flex flex-row items-center justify-end">
-          <div class="hidden sm:group-hover:block mr-8">{icons}</div>
+          <div className="hidden sm:group-hover:block mr-8">{icons}</div>
           {right}
         </div>
       </div>

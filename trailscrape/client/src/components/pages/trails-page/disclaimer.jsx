@@ -7,6 +7,8 @@ const Disclaimer = ({ park, status }) => {
         return "Park status, trail grade and trail status";
       case "scrapeStatusAndGetGradeFromTrailforks":
         return "Trail grade";
+      case "scrapeGradeAndGetStatusFromTrailforks":
+        return "Trail status";
       case "scrapeParkAndGetTrailsFromTrailforks":
         return "Trail grade and trail status";
       default:
@@ -34,6 +36,8 @@ const Disclaimer = ({ park, status }) => {
       case "copyFromTrailforks":
         return buildLink("https://trailforks.com", "Trailforks");
       case "scrapeStatusAndGetGradeFromTrailforks":
+        return buildLink(methodInfo.url, false);
+      case "scrapeGradeAndGetStatusFromTrailforks":
         return buildLink(methodInfo.url, false);
       case "scrapeParkAndGetTrailsFromTrailforks":
         return buildLink(methodInfo.url, false);
