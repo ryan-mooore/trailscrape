@@ -12,7 +12,7 @@ const RegionsPage = ({ bike }) => {
       docTitle="Regions"
       list={
         <List
-          cols={1}
+          cols={2}
           elements={Object.entries(bike.bike).map(([regionID, region]) => (
             <Card
               left={
@@ -20,12 +20,12 @@ const RegionsPage = ({ bike }) => {
                   name={region.name}
                   open={
                     Object.values(region.parks).filter(
-                      (park) => park.status.parkIsOpen
+                      (park) => park.status.status.parkIsOpen
                     ).length
                   }
                   total={Object.values(region.parks).length}
                   objects="regions"
-                ></Summary>
+                />
               }
               link={"/bike/" + regionID}
               right={<StatusBadge status="place" />}

@@ -7,7 +7,7 @@ const Page = ({ docTitle, title, badge, list }) => {
   return (
     <div>
       <BackButton />
-      <div className="mx-auto max-w-md sm:max-w-screen-md flex flex-col sm:flex-row justify-between items-center">
+      <div className="mx-auto max-w-md sm:max-w-screen-lg flex flex-col sm:flex-row justify-between items-center">
         {title}
         {badge}
       </div>

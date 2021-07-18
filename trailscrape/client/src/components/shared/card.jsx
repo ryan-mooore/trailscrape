@@ -17,7 +17,7 @@ const Card = ({ left, right, icons, tooltip, link, bg }) => {
           link && "hover:shadow-md"
         } ${
           bg || "bg-white"
-        } rounded-3xl sm:rounded-full px-2 py-2 mt-3 sm:py-0 group`}
+        } rounded-3xl sm:rounded-full px-2 py-2 sm:py-0 group`}
       >
         <div className="flex flex-row justify-between items-center h-14 sm:pt-0">
           <div className="flex flex-row justify-start items-center">{left}</div>

@@ -1,4 +1,5 @@
 import Card from "../../shared/card";
+import StatusBadge from "../../shared/status-badge";
 import StatusInfo from "../../shared/status-info";
 import Summary from "../../shared/summary";
 
@@ -42,11 +43,12 @@ const ParkCard = ({ park, status, link }) => {
         }
         tooltip={`Trails at ${park.name}`}
         right={
-          <StatusInfo
-            status={stat}
+          <StatusBadge
+            status={status.parkIsOpen}
             percentage={
-              status.trails.filter((trail) => trail.isOpen).length /
-              status.trails.length
+              (status.trails.filter((trail) => trail.isOpen).length /
+                status.trails.length) *
+              100
             }
           />
         }

@@ -63,11 +63,8 @@ const TrailsPage = ({ bike }) => {
       }
       list={
         <List
+          cols={2}
           disclaimer={<Disclaimer park={park.park} status={park.status} />}
-          parkStatus={{
-            park: park.status.status.parkIsOpen,
-            lift: park.status.status.liftIsOpen,
-          }}
           elements={park.status.status.trails
             .filter((trail) => trail.grade)
             .sort((a, b) => a.grade - b.grade || a.name.localeCompare(b.name))

@@ -20,7 +20,7 @@ const StatusBadge = ({ status, left, percentage }) => {
         color: "bg-red-500",
       };
       break;
-    case undefined:
+    case undefined || null:
       state = {
         status: "error",
         color: "bg-gray-500",
@@ -33,6 +33,8 @@ const StatusBadge = ({ status, left, percentage }) => {
         color: "bg-gray-500",
       };
   }
+
+  console.log(state.status);
 
   return (
     <div
