@@ -28,12 +28,12 @@ const TrailsPage = ({ bike }) => {
         <div className="flex flex-col self-stretch mx-5 sm:items-end sm:pt-10">
           {[
             {
-              status: park.status.parkIsOpen,
+              status: park.status.status.parkIsOpen,
               name: "park",
               icon: "park",
             },
             {
-              status: park.status.liftIsOpen,
+              status: park.status.status.liftIsOpen,
               name: "uplift",
               icon: "moving",
             },
@@ -50,9 +50,10 @@ const TrailsPage = ({ bike }) => {
                   status={status}
                   percentage={
                     name === "park"
-                      ? (park.status.trails.filter((trail) => trail.isOpen)
-                          .length /
-                          park.status.trails.length) *
+                      ? (park.status.status.trails.filter(
+                          (trail) => trail.isOpen
+                        ).length /
+                          park.status.status.trails.length) *
                         100
                       : undefined
                   }
