@@ -11,7 +11,7 @@ module.exports = {
   },
   purge: {
     content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-    safelist: ['grid-cols-1', 'grid-cols-2']
+    safelist: ['md:grid-cols-1', 'md:grid-cols-2']
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
