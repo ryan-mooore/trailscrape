@@ -6,7 +6,7 @@ const List = ({ disclaimer, elements, cols }) => {
           {disclaimer}
         </div>
       ) : undefined}
-      <div className={`grid md:grid-cols-${cols} gap-3`}>{elements}</div>
+      <div className={`grid md:grid-cols-${cols} gap-4`}>{elements}</div>
     </div>
   );
 };

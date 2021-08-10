@@ -5,33 +5,33 @@ const StatusBadge = ({ status, left, percentage }) => {
     case true:
       state = {
         status: "open",
-        color: "bg-green-500",
+        color: "green",
       };
-      if (percentage && percentage < 50) {
+      if (percentage && percentage * 100 < 50) {
         state = {
           status: "open",
-          color: "bg-yellow-400",
+          color: "yellow",
         };
       }
       break;
     case false:
       state = {
         status: "closed",
-        color: "bg-red-500",
+        color: "red",
       };
       break;
     case undefined:
     case null:
       state = {
         status: "error",
-        color: "bg-gray-500",
+        color: "gray",
       };
       break;
     default:
       isIcon = true;
       state = {
         status: status,
-        color: "bg-gray-500",
+        color: "gray",
       };
   }
 
@@ -39,9 +39,9 @@ const StatusBadge = ({ status, left, percentage }) => {
     <div
       className={`${
         left ? "h-14 pr-5 mb-3 justify-between" : "h-10 w-24 justify-center"
-      } flex flex-row items-center text-white font-bold rounded-full ${
+      } flex flex-row items-center text-white font-bold rounded-full bg-${
         state.color
-      } ${isIcon ? "material-icons-round text-md" : "uppercase text-sm"}`}
+      }-500 ${isIcon ? "material-icons-round text-md" : "uppercase text-sm"}`}
       title={state.status.toUpperCase()}
     >
       {left && <div className="pl-5 pr-10">{left}</div>}
