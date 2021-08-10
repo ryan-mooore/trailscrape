@@ -1,4 +1,4 @@
-const StatusBadge = ({ status, left, percentage }) => {
+const StatusBadge = ({ status, left, percentage, color }) => {
   let state = {};
   let isIcon = false;
   switch (status) {
@@ -38,14 +38,20 @@ const StatusBadge = ({ status, left, percentage }) => {
   return (
     <div
       className={`${
-        left ? "h-14 pr-5 mb-3 justify-between" : "h-10 w-24 justify-center"
-      } flex flex-row items-center text-white font-bold rounded-full bg-${
-        state.color
-      }-500 ${isIcon ? "material-icons-round text-md" : "uppercase text-sm"}`}
+        left ? "h-14 pr-5 justify-between" : "h-10 w-24 justify-center"
+      } flex flex-row items-center text-white font-bold rounded-full ${
+        color ? color : "bg-" + state.color + "-500"
+      }`}
       title={state.status.toUpperCase()}
     >
       {left && <div className="pl-5 pr-10">{left}</div>}
-      {state.status}
+      <div
+        className={
+          isIcon ? "material-icons-round text-md" : "uppercase text-sm"
+        }
+      >
+        {state.status}
+      </div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Analytics from "react-router-ga";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import GHMark from "./assets/gh-mark.svg";
 import TwitterMark from "./assets/twitter-mark.svg";
+import HomePage from "./components/pages/home-page/home-page";
 import NoMatchPage from "./components/pages/no-match-page/no-match-page";
 import ParksPage from "./components/pages/parks-page/parks-page";
 import RegionsPage from "./components/pages/regions-page/regions-page";
@@ -62,8 +63,8 @@ const Routes = () => {
               <Route 
                 exact
                 path="/"
+                render={() => <HomePage />}
               >
-                <Redirect to="/bike" />
               </Route>
               <Route
                 path="/:activity/:region/:park/"

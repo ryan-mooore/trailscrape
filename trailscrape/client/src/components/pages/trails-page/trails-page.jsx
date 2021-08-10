@@ -18,21 +18,19 @@ const TrailsPage = ({ bike }) => {
         park.status.parkIsOpen ? "OPEN" : "CLOSED"
       })`}
       title={
-        <div className="flex flex-row justify-start items-center">
-          <Title
-            title="Trails"
-            subtitle={`at ${park.park.name || "Loading..."}`}
-            right={
-              <div className="relative top-2 flex flex-row items-center text-gray-500 font-bold text-3xl align-text-bottom h-10 overflow-hidden">
-                <img
-                  className="mix-blend-hard-light h-auto max-w-full w-12"
-                  src={`http://openweathermap.org/img/wn/${park.status.weather.conditions.icon}@2x.png`}
-                ></img>
-                <div className="relative -left-0.5 text-md font-semibold">{`${park.status.weather.temp}˚`}</div>
-              </div>
-            }
-          />
-        </div>
+        <Title
+          title="Trails"
+          subtitle={`at ${park.park.name || "Loading..."}`}
+          right={
+            <div className="relative top-2 flex flex-row items-center text-gray-500 font-bold text-3xl align-text-bottom h-10 overflow-hidden">
+              <img
+                className="mix-blend-hard-light h-auto max-w-full w-12"
+                src={`https://openweathermap.org/img/wn/${park.status.weather.conditions.icon}@2x.png`}
+              ></img>
+              <div className="relative -left-0.5 text-md font-semibold">{`${park.status.weather.temp}˚`}</div>
+            </div>
+          }
+        />
       }
       badge={
         <div className="flex flex-col self-stretch mx-5 sm:items-end sm:pt-10">
