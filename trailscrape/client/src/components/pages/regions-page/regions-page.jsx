@@ -10,7 +10,7 @@ const RegionsPage = ({ bike }) => {
     <Page
       title={<Title title="Regions" />}
       docTitle="Regions"
-      meta={`Mountain bike park status for parks in the New Zealand area. Trail status for parks in ${Object.values(
+      meta={`Bike park status for parks in the New Zealand area. Current trail status and information for parks in all regions: ${Object.values(
         bike.bike
       )
         .map((region) => region.name)

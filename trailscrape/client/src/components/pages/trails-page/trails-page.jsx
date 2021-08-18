@@ -17,9 +17,9 @@ const TrailsPage = ({ bike }) => {
       docTitle={`Trail Status for ${park.park.name} (${
         park.status.status.park ? "OPEN" : "CLOSED"
       })`}
-      meta={`Mountain bike park trail status for all trails at ${
+      meta={` Weather conditions and current trail status for ${
         park.park.name
-      }. Status for trails ${park.status.status.trails
+      }. Mountain bike trail status for all trails: ${park.status.status.trails
         .map((trail) => trail.name)
         .join(", ")}.`}
       title={

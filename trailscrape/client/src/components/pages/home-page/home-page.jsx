@@ -10,7 +10,7 @@ const HomePage = () => {
       noBack
       docTitle="Activities"
       meta={
-        "Trail status for outdoor activities in New Zealand, mountain biking and skiing park and trail status."
+        "Trail status and current weather conditions for outdoor activities in New Zealand. Mountain biking and skiing status and information."
       }
       title={<Title title="Activities" />}
       list={
