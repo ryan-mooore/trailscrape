@@ -21,20 +21,17 @@ const ParksPage = ({ bike }) => {
         <List
           cols={2}
           disclaimer={
-            <>
-              <div>Click any region to see trail status</div>
-              <div>
-                Last updated{" "}
-                <ReactTimeAgo
-                  date={
-                    Object.values(region.parks).sort(
-                      (a, b) => a.status.scrapeTime - b.status.scrapeTime
-                    )[0].status.scrapeTime
-                  }
-                  locale="en-NZ"
-                />
-              </div>
-            </>
+            <div className="mt-1 mb-2">
+              Last updated{" "}
+              <ReactTimeAgo
+                date={
+                  Object.values(region.parks).sort(
+                    (a, b) => a.status.scrapeTime - b.status.scrapeTime
+                  )[0].status.scrapeTime
+                }
+                locale="en-NZ"
+              />
+            </div>
           }
           elements={Object.entries(region.parks)
             .sort()

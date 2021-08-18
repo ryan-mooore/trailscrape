@@ -32,7 +32,7 @@ const TrailsPage = ({ bike }) => {
         />
       }
       badge={
-        <div className="flex flex-col self-stretch mx-5 sm:items-end sm:pt-10">
+        <div className="grid gap-4 self-stretch sm:self-auto mx-5 sm:items-end sm:pt-10">
           {[
             {
               status: park.status.status.park,
@@ -84,7 +84,7 @@ const TrailsPage = ({ bike }) => {
                   "scrapeParkAndGetTrailsFromTrailforks",
                   "copyFromTrailforks",
                   "scrapeGradeAndGetStatusFromTrailforks",
-                ].includes(park.park.method)}
+                ].includes(park.park.methods.trails.method)}
               />
             ))}
         />

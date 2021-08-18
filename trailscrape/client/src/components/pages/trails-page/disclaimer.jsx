@@ -1,93 +1,96 @@
+import { useState } from "react";
 import ReactTimeAgo from "react-time-ago";
+import { sentenceCase } from "sentence-case";
 
 const Disclaimer = ({ park, status }) => {
-  const unreliableSources = (method) => {
-    switch (method) {
-      case "copyFromTrailforks":
-        return "Park status, trail grade and trail status";
-      case "scrapeStatusAndGetGradeFromTrailforks":
-        return "Trail grade";
-      case "scrapeGradeAndGetStatusFromTrailforks":
-        return "Trail status";
-      case "scrapeParkAndGetTrailsFromTrailforks":
-        return "Trail grade and trail status";
-      default:
-        return false;
+  const [visible, setVisible] = useState(false);
+
+  const buildLink = (url, text) => {
+    if (!text) {
+      text = url.replace(/(^\w+:|^)\/\/(w{3}\.)*([^/]*)\/*.*$/, "$3");
+    }
+    if (url) {
+      return (
+        <a className="underline" target="_blank" rel="noreferrer" href={url}>
+          {text}
+        </a>
+      );
+    } else {
+      return <span>{text}</span>;
     }
   };
 
-  const source = ({ method, methodInfo }) => {
-    const buildLink = (url, text) => {
-      if (!text) {
-        text = url.replace(/(^\w+:|^)\/\/(w{3}\.)*([^/]*)\/*.*$/, "$3");
+  let methodMap = {
+    copy: {
+      disclaimer: true,
+      text: (
+        <>
+          is sourced from {buildLink("https://trailforks.com")} and could be
+          incorrect
+        </>
+      ),
+      statuses: [],
+    },
+    scrape: {
+      statuses: [],
+    },
+    api: {
+      text: "is sourced from an external API",
+      statuses: [],
+    },
+    infer: {
+      disclaimer: true,
+      text: "is inferred and could be incorrect",
+      statuses: [],
+    },
+    "": {
+      text: "is from an unknown source",
+      statuses: [],
+    },
+  };
+
+  const sources = (methods) => {
+    let sourcesText = [];
+    for (let [status, method] of Object.entries(methods)) {
+      if (status === "trails") status = "trail";
+      for (let [abstractMethod, info] of Object.entries(methodMap)) {
+        if (method.method.startsWith(abstractMethod)) {
+          if (!info.text) {
+            info.text = <>is sourced from {buildLink(method.info.url)}</>;
+          }
+          info.statuses.push(status);
+          break;
+        }
       }
-      if (url) {
-        return (
-          <a className="underline" target="_blank" rel="noreferrer" href={url}>
-            {text}
-          </a>
+    }
+    for (let method of Object.values(methodMap)) {
+      if (method.statuses.length > 0) {
+        sourcesText.push(
+          <div className={`sentence ${method.disclaimer && "font-semibold"}`}>
+            {sentenceCase(method.statuses.join(" and "))}
+            <a href={method.source}> status {method.text}</a>
+          </div>
         );
-      } else {
-        return <span>{text}</span>;
       }
-    };
-
-    switch (method) {
-      case "copyFromTrailforks":
-        return buildLink("https://trailforks.com", "Trailforks");
-      case "scrapeStatusAndGetGradeFromTrailforks":
-        return buildLink(methodInfo.url, false);
-      case "scrapeGradeAndGetStatusFromTrailforks":
-        return buildLink(methodInfo.url, false);
-      case "scrapeParkAndGetTrailsFromTrailforks":
-        return buildLink(methodInfo.url, false);
-      case "scrapeTrails":
-        return buildLink(methodInfo.url, false);
-      case "api":
-        return buildLink(false, "an external API");
-      default:
-        break;
     }
-  };
 
-  const regionIDSource = (regionID) => {
-    if (typeof regionID == "string") regionID = [regionID];
-    return (
-      <>
-        {regionID
-          .map((park) => (
-            <a
-              className="underline"
-              target="_blank"
-              rel="noreferrer"
-              href={`https://www.trailforks.com/region/${park}`}
-            >
-              {park}
-            </a>
-          ))
-          .reduce((acc, x) => (acc === null ? [x] : [acc, ", ", x]), null)}
-      </>
-    );
+    return sourcesText;
   };
 
   return (
     <div>
-      <div>
-        Last updated <ReactTimeAgo date={status.scrapeTime} locale="en-NZ" />{" "}
-        from {source(park)}
+      <div className="flex flex-row items-center mb-1">
+        <div className="mr-3">
+          Last updated <ReactTimeAgo date={status.scrapeTime} locale="en-NZ" />
+        </div>
+        <button
+          className="material-icons-round"
+          onClick={() => setVisible(!visible)}
+        >
+          info
+        </button>
       </div>
-      {unreliableSources(park.method) && (
-        <>
-          <div>
-            {unreliableSources(park.method)} data sourced from{" "}
-            {regionIDSource(park.methodInfo.regionID)} on Trailforks
-          </div>
-          <div>
-            NB: Trailforks data provides 3rd party trail information and is
-            subject to inaccuracy
-          </div>
-        </>
-      )}
+      {visible && <div>{sources(park.methods)}</div>}
     </div>
   );
 };

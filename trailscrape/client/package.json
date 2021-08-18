@@ -18,6 +18,7 @@
     "react-scripts": "4.0.3",
     "react-time-ago": "^6.2.2",
     "react-transition-group": "^4.4.1",
+    "sentence-case": "^3.0.4",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.0",
     "web-vitals": "^1.1.0"
   },
