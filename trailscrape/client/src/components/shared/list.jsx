@@ -1,3 +1,5 @@
+import React from "react";
+
 const List = ({ disclaimer, elements, cols }) => {
   return (
     <div className="pl-5 pr-5 flex flex-col max-w-md sm:max-w-screen-lg m-auto items-stretch sm:pb-12">
@@ -6,7 +8,11 @@ const List = ({ disclaimer, elements, cols }) => {
           {disclaimer}
         </div>
       ) : undefined}
-      <div className={`grid md:grid-cols-${cols} gap-4`}>{elements}</div>
+      <div className={`grid md:grid-cols-${cols} gap-4`}>
+        {elements.map(([key, element]) => (
+          <React.Fragment key={key}>{element}</React.Fragment>
+        ))}
+      </div>
     </div>
   );
 };

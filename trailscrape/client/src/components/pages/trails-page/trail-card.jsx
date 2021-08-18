@@ -19,13 +19,13 @@ const TrailCard = ({ trail, canEdit }) => {
       }
       right={<StatusBadge status={trail.isOpen} />}
       icons={
-        <div class="relative h-6 flex flex-row">
+        <div className="relative h-6 flex flex-row justify-end">
           {trail.trailforksName ? (
             <a
               href={`https://trailforks.com/trails/${trail.trailforksName}`}
               target="_blank"
               rel="noreferrer"
-              class="z-10 material-icons-round text-gray-500"
+              className="z-10 material-icons-round text-gray-500"
               title="Open trail on Trailforks"
             >
               open_in_new
@@ -34,7 +34,7 @@ const TrailCard = ({ trail, canEdit }) => {
           {canEdit && (
             <>
               <button
-                class="z-10 material-icons-round text-gray-500 ml-6"
+                className="z-10 material-icons-round text-gray-500 ml-6"
                 title="Edit trail status"
                 onClick={() => setPopoverClicked(!popoverClicked)}
               >
@@ -42,7 +42,7 @@ const TrailCard = ({ trail, canEdit }) => {
               </button>
               <div
                 onClick={() => setPopoverClicked(false)}
-                class={`bg-gray-400 opacity-50 fixed left-0 top-0 w-screen h-screen ${
+                className={`bg-gray-400 opacity-50 fixed left-0 top-0 w-screen h-screen ${
                   popoverClicked ? undefined : "hidden"
                 }`}
               ></div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import ReactTimeAgo from "react-time-ago";
 import { sentenceCase } from "sentence-case";
 
@@ -66,9 +66,13 @@ const Disclaimer = ({ park, status }) => {
     for (let method of Object.values(methodMap)) {
       if (method.statuses.length > 0) {
         sourcesText.push(
-          <div className={`sentence ${method.disclaimer && "font-semibold"}`}>
-            {sentenceCase(method.statuses.join(" and "))}
-            <a href={method.source}> status {method.text}</a>
+          <div
+            className={`sentence ${
+              method.disclaimer ? "font-semibold" : undefined
+            }`}
+          >
+            {sentenceCase(method.statuses.join(" and ")) + " status "}{" "}
+            {method.text}
           </div>
         );
       }
@@ -81,7 +85,8 @@ const Disclaimer = ({ park, status }) => {
     <div>
       <div className="flex flex-row items-center mb-1">
         <div className="mr-3">
-          Last updated <ReactTimeAgo date={status.scrapeTime} locale="en-NZ" />
+          Last updated{" "}
+          <ReactTimeAgo date={Date.parse(status.scrapeTime)} locale="en-NZ" />
         </div>
         <button
           className="material-icons-round"
@@ -90,7 +95,13 @@ const Disclaimer = ({ park, status }) => {
           info
         </button>
       </div>
-      {visible && <div>{sources(park.methods)}</div>}
+      {visible && (
+        <div>
+          {sources(park.methods).map((disclaimer, index) => (
+            <React.Fragment key={index}>{disclaimer}</React.Fragment>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

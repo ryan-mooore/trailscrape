@@ -47,24 +47,28 @@ const TrailsPage = ({ bike }) => {
           ].map(
             ({ status, name, icon }) =>
               status !== undefined && (
-                <StatusBadge
-                  left={
-                    <div className="flex flex-row justify-between w-20 items-center text-xl font-normal capitalize">
-                      <span className="material-icons-round pr-1">{icon}</span>
-                      <div>{name}</div>
-                    </div>
-                  }
-                  status={status}
-                  percentage={
-                    name === "park"
-                      ? (park.status.status.trails.filter(
-                          (trail) => trail.isOpen
-                        ).length /
-                          park.status.status.trails.length) *
-                        100
-                      : undefined
-                  }
-                />
+                <React.Fragment key={name}>
+                  <StatusBadge
+                    left={
+                      <div className="flex flex-row justify-between w-20 items-center text-xl font-normal capitalize">
+                        <span className="material-icons-round pr-1">
+                          {icon}
+                        </span>
+                        <div>{name}</div>
+                      </div>
+                    }
+                    status={status}
+                    percentage={
+                      name === "park"
+                        ? (park.status.status.trails.filter(
+                            (trail) => trail.isOpen
+                          ).length /
+                            park.status.status.trails.length) *
+                          100
+                        : undefined
+                    }
+                  />
+                </React.Fragment>
               )
           )}
         </div>
@@ -76,17 +80,17 @@ const TrailsPage = ({ bike }) => {
           elements={park.status.status.trails
             .filter((trail) => trail.grade)
             .sort((a, b) => a.grade - b.grade || a.name.localeCompare(b.name))
-            .map((trail) => (
+            .map((trail) => [
+              trail.id,
               <TrailCard
-                key={trail.id}
                 trail={trail}
                 canEdit={[
                   "scrapeParkAndGetTrailsFromTrailforks",
                   "copyFromTrailforks",
                   "scrapeGradeAndGetStatusFromTrailforks",
                 ].includes(park.park.methods.trails.method)}
-              />
-            ))}
+              />,
+            ])}
         />
       }
     />

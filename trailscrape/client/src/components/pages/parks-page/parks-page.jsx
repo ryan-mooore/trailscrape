@@ -24,11 +24,11 @@ const ParksPage = ({ bike }) => {
             <div className="mt-1 mb-2">
               Last updated{" "}
               <ReactTimeAgo
-                date={
+                date={Date.parse(
                   Object.values(region.parks).sort(
                     (a, b) => a.status.scrapeTime - b.status.scrapeTime
                   )[0].status.scrapeTime
-                }
+                )}
                 locale="en-NZ"
               />
             </div>
@@ -36,13 +36,14 @@ const ParksPage = ({ bike }) => {
           elements={Object.entries(region.parks)
             .sort()
             .filter(([parkID, park]) => !park.status.scrapeError)
-            .map(([parkID, park]) => (
+            .map(([parkID, park]) => [
+              parkID,
               <ParkCard
                 status={park.status.status}
                 park={park.park}
                 link={`/${params.activity}/${params.region}/${parkID}`}
-              />
-            ))}
+              />,
+            ])}
         />
       }
     />

@@ -13,14 +13,18 @@ const HomePage = () => {
       list={
         <List
           cols="2"
-          elements={
-            <>
+          elements={[
+            [
+              "bike",
               <Link to="/bike">
                 <StatusBadge
                   left={<div className="w-20">Bike</div>}
                   status="pedal_bike"
                 />
-              </Link>
+              </Link>,
+            ],
+            [
+              "ski",
               <StatusBadge
                 left={
                   <div className="flex flex-row">
@@ -30,9 +34,9 @@ const HomePage = () => {
                 }
                 status="downhill_skiing"
                 color="bg-gray-300"
-              />
-            </>
-          }
+              />,
+            ],
+          ]}
         />
       }
     />

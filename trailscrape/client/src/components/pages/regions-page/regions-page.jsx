@@ -13,7 +13,8 @@ const RegionsPage = ({ bike }) => {
       list={
         <List
           cols={2}
-          elements={Object.entries(bike.bike).map(([regionID, region]) => (
+          elements={Object.entries(bike.bike).map(([regionID, region]) => [
+            regionID,
             <Card
               left={
                 <Summary
@@ -29,8 +30,8 @@ const RegionsPage = ({ bike }) => {
               }
               link={"/bike/" + regionID}
               right={<StatusBadge status="place" />}
-            />
-          ))}
+            />,
+          ])}
         />
       }
     />
