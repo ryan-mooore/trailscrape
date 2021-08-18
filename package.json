@@ -10,8 +10,5 @@
   },
   "engines": {
     "node": "15.10"
-  },
-  "dependencies": {
-    "react-circular-progressbar": "^2.0.4"
   }
 }
