@@ -82,6 +82,7 @@ const Routes = () => {
               <Route
                 path="*"
                 render={() => <NoMatchPage bike={bike} />}
+                status={404}
               />
             </Switch>
           </CSSTransition>

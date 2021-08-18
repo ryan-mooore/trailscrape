@@ -9,6 +9,9 @@ const HomePage = () => {
     <Page
       noBack
       docTitle="Activities"
+      meta={
+        "Trail status for outdoor activities in New Zealand, mountain biking and skiing park and trail status."
+      }
       title={<Title title="Activities" />}
       list={
         <List

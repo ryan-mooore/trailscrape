@@ -32,6 +32,7 @@ const StatusBadge = ({ status, left, percentage, color }) => {
         status: "on hold",
         color: "yellow",
       };
+      break;
     default:
       isIcon = true;
       state = {

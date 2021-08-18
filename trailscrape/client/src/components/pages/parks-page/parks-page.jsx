@@ -12,10 +12,15 @@ const ParksPage = ({ bike }) => {
 
   return (
     <Page
-      docTitle={`${region.name} (${
+      docTitle={`Trail Status for Parks in ${region.name} (${
         Object.values(region.parks).filter((park) => park.status.status.park)
           .length
       } OPEN)`}
+      meta={`Park status for mountain bike parks in the ${
+        region.name
+      } area. Trail status for ${Object.values(region.parks)
+        .map((park) => park.park.name)
+        .join(", ")}.`}
       title={<Title title="Parks" subtitle={`in ${region.name}`} />}
       list={
         <List
