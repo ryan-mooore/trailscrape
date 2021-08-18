@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Analytics from "react-router-ga";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import GHMark from "./assets/gh-mark.svg";

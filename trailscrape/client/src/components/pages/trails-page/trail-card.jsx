@@ -1,10 +1,9 @@
-import GradeLogo from "./grade-icon";
-import Card from "../../shared/card";
-import StatusInfo from "../../shared/status-info";
 import { useState } from "react";
-import Popover from "./popover";
-import StatusBadge from "../../shared/status-badge";
+import Card from "../../shared/card";
 import CardTitle from "../../shared/card-title";
+import StatusBadge from "../../shared/status-badge";
+import GradeLogo from "./grade-icon";
+import Popover from "./popover";
 const TrailCard = ({ trail, canEdit }) => {
   const [popoverClicked, setPopoverClicked] = useState(false);
 

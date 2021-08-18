@@ -13,9 +13,8 @@ const ParksPage = ({ bike }) => {
   return (
     <Page
       docTitle={`${region.name} (${
-        Object.values(region.parks).filter(
-          (park) => park.status.status.parkIsOpen
-        ).length
+        Object.values(region.parks).filter((park) => park.status.status.park)
+          .length
       } OPEN)`}
       title={<Title title="Parks" subtitle={`in ${region.name}`} />}
       list={

@@ -1,8 +1,7 @@
 import Card from "../../shared/card";
-import StatusBadge from "../../shared/status-badge";
-import StatusInfo from "../../shared/status-info";
-import Summary from "../../shared/summary";
 import CardTitle from "../../shared/card-title";
+import StatusBadge from "../../shared/status-badge";
+import Summary from "../../shared/summary";
 
 const ParkCard = ({ park, status, link }) => {
   const percentage =
@@ -10,7 +9,7 @@ const ParkCard = ({ park, status, link }) => {
 
   return (
     <Card
-      large={status.liftIsOpen !== undefined && status.parkIsOpen !== undefined}
+      large={status.lift !== undefined && status.park !== undefined}
       tooltip={`Trails at ${park.name}`}
       link={link}
       left={
@@ -34,12 +33,12 @@ const ParkCard = ({ park, status, link }) => {
       right={
         <div className="flex flex-col xs:flex-row items-end xs:items-center">
           <div className="pt-3 xs:pt-0 flex flex-col xs:flex-row md:flex-col-reverse items-end xs:items-center justify-around md:items-end text-gray-400">
-            {status.liftIsOpen !== undefined && (
+            {status.lift !== undefined && (
               <>
                 <div className="flex flex-row justify-right items-center xs:mr-5 md:mr-0 pb-2 xs:pb-0">
                   <div className="pr-3">uplift</div>
                   <div>
-                    <StatusBadge status={status.liftIsOpen} />
+                    <StatusBadge status={status.lift} />
                   </div>
                 </div>
                 <div className="hidden md:block h-0.5 bg-gray-200 w-12 mr-6 my-3.5"></div>
@@ -49,7 +48,7 @@ const ParkCard = ({ park, status, link }) => {
               <div className="px-3">park</div>
               <div>
                 <StatusBadge
-                  status={status.parkIsOpen}
+                  status={status.park}
                   percentage={percentage && percentage}
                 />
               </div>

@@ -14,9 +14,7 @@ const TrailsPage = ({ bike }) => {
   return (
     <Page
       structure={park}
-      docTitle={`${park.park.name} (${
-        park.status.parkIsOpen ? "OPEN" : "CLOSED"
-      })`}
+      docTitle={`${park.park.name} (${park.status.park ? "OPEN" : "CLOSED"})`}
       title={
         <Title
           title="Trails"
@@ -26,6 +24,7 @@ const TrailsPage = ({ bike }) => {
               <img
                 className="mix-blend-hard-light h-auto max-w-full w-12"
                 src={`https://openweathermap.org/img/wn/${park.status.weather.conditions.icon}@2x.png`}
+                alt={park.status.weather.conditions.description}
               ></img>
               <div className="relative -left-0.5 text-md font-semibold">{`${park.status.weather.temp}˚`}</div>
             </div>
@@ -36,12 +35,12 @@ const TrailsPage = ({ bike }) => {
         <div className="flex flex-col self-stretch mx-5 sm:items-end sm:pt-10">
           {[
             {
-              status: park.status.status.parkIsOpen,
+              status: park.status.status.park,
               name: "park",
               icon: "park",
             },
             {
-              status: park.status.status.liftIsOpen,
+              status: park.status.status.lift,
               name: "uplift",
               icon: "moving",
             },

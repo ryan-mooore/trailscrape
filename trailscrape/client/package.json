@@ -11,6 +11,7 @@
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.35",
     "react": "^17.0.1",
+    "react-circular-progressbar": "^2.0.4",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-router-ga": "^1.2.3",
