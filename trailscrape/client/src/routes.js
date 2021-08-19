@@ -1,6 +1,12 @@
+import { GA4React } from "ga-4-react";
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Analytics from "react-router-ga";
+import { HelmetProvider } from "react-helmet-async";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import GHMark from "./assets/gh-mark.svg";
 import TwitterMark from "./assets/twitter-mark.svg";
@@ -12,19 +18,28 @@ import TrailsPage from "./components/pages/trails-page/trails-page";
 import Message from "./components/shared/message";
 import "./index.css";
 
+const ga4react = new GA4React("G-GSWYZKT0SR");
+
 const App = () => (
-  <Router>
-    <Analytics id="UA-159417101-1" {...(process.env.NODE_ENV === "development" ? { debug: true } : undefined)}>
+  <HelmetProvider>
+    <Router>
       <Routes />
-    </Analytics>
-  </Router>
+    </Router>
+  </HelmetProvider>
 );
 
 const Footer = () => (
   <footer className="absolute bottom-0 h-10 w-full bg-gray-500 hidden sm:flex flex-row justify-between items-center pl-5 pr-5 text-gray-400 text-sm">
-    <div className="w-56">&copy; Copyright Ryan Moore, {new Date().getFullYear()}</div>
+    <div className="w-56">
+      &copy; Copyright Ryan Moore, {new Date().getFullYear()}
+    </div>
     <div className="flex flex-row">
-      <a href="https://github.com/ryan-mooore/trailscrape" rel="noreferrer" title="Link to source code (Github)" target="_blank">
+      <a
+        href="https://github.com/ryan-mooore/trailscrape"
+        rel="noreferrer"
+        title="Link to source code (Github)"
+        target="_blank"
+      >
         <img
           src={GHMark}
           alt="link to GitHub repository"
@@ -32,8 +47,19 @@ const Footer = () => (
           width="25"
         ></img>
       </a>
-      <a href="https://buymeacoffee.com/ryanmooore" rel="noreferrer" className="underline px-4 text-lg font-bold text-gray-400">Donate!</a>
-      <a href="https://twitter.com/ryan_mooore" rel="noreferrer" title="Link to my Twitter" target="_blank">
+      <a
+        href="https://buymeacoffee.com/ryanmooore"
+        rel="noreferrer"
+        className="underline px-4 text-lg font-bold text-gray-400"
+      >
+        Donate!
+      </a>
+      <a
+        href="https://twitter.com/ryan_mooore"
+        rel="noreferrer"
+        title="Link to my Twitter"
+        target="_blank"
+      >
         <img
           src={TwitterMark}
           alt="link to my Twitter"
@@ -43,7 +69,12 @@ const Footer = () => (
       </a>
     </div>
     <div className="w-56 text-right">
-      <a href="https://facebook.com/ryan.moooore" rel="noreferrer" className="underline" target="_blank">
+      <a
+        href="https://facebook.com/ryan.moooore"
+        rel="noreferrer"
+        className="underline"
+        target="_blank"
+      >
         Contact
       </a>
     </div>
@@ -53,6 +84,7 @@ const Footer = () => (
 const Routes = () => {
   const [bike, setBike] = useState();
   const [apiDown, setApiDown] = useState(null);
+  const history = useHistory();
 
   const router = (
     <div className="text-blue-50 relative min-h-screen">
@@ -60,12 +92,7 @@ const Routes = () => {
         <TransitionGroup>
           <CSSTransition classNames="fade" timeout={500}>
             <Switch>
-              <Route 
-                exact
-                path="/"
-                render={() => <HomePage />}
-              >
-              </Route>
+              <Route exact path="/" render={() => <HomePage />}></Route>
               <Route
                 path="/:activity/:region/:park/"
                 render={() => <TrailsPage bike={bike} />}
@@ -75,7 +102,7 @@ const Routes = () => {
                 path="/:activity/:region"
                 render={() => <ParksPage bike={bike} />}
               />
-              <Route 
+              <Route
                 path="/:activity"
                 render={() => <RegionsPage bike={bike} />}
               />
@@ -98,10 +125,23 @@ const Routes = () => {
       apiEndpoint = "http://localhost:9000/api/bike";
     }
 
-    const callApi = () => {
+    const listenForPageviews = async () => {
+      try {
+        await ga4react.initialize();
+      } catch (err) {
+        console.error(err); // user is using adblock
+        return;
+      }
+      ga4react.pageview(history.location.pathname);
+      return history.listen((location, action) => {
+        ga4react.pageview(location.pathname);
+      });
+    };
+
+    const callApi = async () => {
       fetch(apiEndpoint)
-        .then(res => res.json())
-        .then(json => {
+        .then((res) => res.json())
+        .then((json) => {
           setBike(json);
           setApiDown(false);
         })
@@ -109,12 +149,13 @@ const Routes = () => {
           setApiDown(true);
           throw error;
         });
-      setTimeout(callApi, 600000)
+      setTimeout(callApi, 600000);
+      return () => clearTimeout();
     };
 
     callApi();
-
-  }, []);
+    listenForPageviews();
+  }, [history]);
 
   switch (apiDown) {
     case true:
