@@ -4,6 +4,7 @@ import Grade3 from "../../../assets/icons/grade/3";
 import Grade4 from "../../../assets/icons/grade/4";
 import Grade5 from "../../../assets/icons/grade/5";
 import Grade6 from "../../../assets/icons/grade/6";
+import Grade7 from "../../../assets/icons/grade/7";
 
 const GradeIcon = ({ size, grade }) => {
   switch (+grade) {
@@ -19,6 +20,8 @@ const GradeIcon = ({ size, grade }) => {
       return <Grade5 size={size} />;
     case 6:
       return <Grade6 size={size} />;
+    case 7:
+      return <Grade7 size={size} />;
 
     default:
       return <svg width="30" height="30"></svg>;
