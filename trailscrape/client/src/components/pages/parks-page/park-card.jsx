@@ -4,17 +4,23 @@ import StatusBadge from "../../shared/status-badge";
 import Summary from "../../shared/summary";
 
 const ParkCard = ({ park, status, link }) => {
-  const percentage =
-    status.trails.filter((trail) => trail.isOpen).length / status.trails.length;
+  let percentage;
+  if (status === undefined) {
+    percentage = 0;
+  } else {
+    percentage =
+      status.trails.filter((trail) => trail.isOpen).length /
+      status.trails.length;
+  }
 
   return (
     <Card
-      large={status.lift !== undefined && status.park !== undefined}
+      large={status?.lift !== undefined && status?.park !== undefined}
       tooltip={`Trails at ${park.name}`}
       link={link}
       left={
         <div className="flex flex-col">
-          {status.scrapeError ? (
+          {status === undefined ? (
             <CardTitle
               name={`Sorry, status for ${park.name} not currently available.`}
             />
@@ -33,7 +39,7 @@ const ParkCard = ({ park, status, link }) => {
       right={
         <div className="flex flex-col xs:flex-row items-end xs:items-center">
           <div className="pt-3 xs:pt-0 flex flex-col xs:flex-row md:flex-col-reverse items-end xs:items-center justify-around md:items-end text-gray-400">
-            {status.lift !== undefined && (
+            {status?.lift !== undefined && (
               <>
                 <div className="flex flex-row justify-right items-center xs:mr-5 md:mr-0 pb-2 xs:pb-0">
                   <div className="pr-3">uplift</div>
@@ -48,7 +54,7 @@ const ParkCard = ({ park, status, link }) => {
               <div className="px-3">park</div>
               <div>
                 <StatusBadge
-                  status={status.park}
+                  status={status?.park}
                   percentage={percentage && percentage}
                 />
               </div>

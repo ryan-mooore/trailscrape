@@ -13,7 +13,7 @@ const ParksPage = ({ bike }) => {
   return (
     <Page
       docTitle={`Trail Status for Parks in ${region.name} (${
-        Object.values(region.parks).filter((park) => park.status.status.park)
+        Object.values(region.parks).filter((park) => park.status.status?.park)
           .length
       } OPEN)`}
       meta={`Current park and trail status for all parks in the ${
@@ -40,11 +40,12 @@ const ParksPage = ({ bike }) => {
           }
           elements={Object.entries(region.parks)
             .sort()
-            .filter(([parkID, park]) => !park.status.scrapeError)
             .map(([parkID, park]) => [
               parkID,
               <ParkCard
-                status={park.status.status}
+                status={
+                  park.status.scrapeError ? undefined : park.status.status
+                }
                 park={park.park}
                 link={`/${params.activity}/${params.region}/${parkID}`}
               />,

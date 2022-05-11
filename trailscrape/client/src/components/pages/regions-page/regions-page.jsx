@@ -26,7 +26,7 @@ const RegionsPage = ({ bike }) => {
                   name={region.name}
                   open={
                     Object.values(region.parks).filter(
-                      (park) => park.status.status.park
+                      (park) => park.status.status?.park
                     ).length
                   }
                   total={Object.values(region.parks).length}
